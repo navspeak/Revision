@@ -1,0 +1,293 @@
+NORMAL DISTRIBUTION
+====================
+
+What it is
+-----------
+A continuous probability distribution that is symmetric and bell-shaped.
+Most real-world continuous variables follow (or approximate) a normal distribution.
+
+Examples: height, weight, exam scores, errors in measurement, IQ scores.
+
+
+Shape
+------
+PDF is a symmetric bell curve:
+
+        │          ╭───╮
+        │        ╭─╯   ╰─╮
+        │      ╭─╯         ╰─╮
+        │   ╭──╯               ╰──╮
+        │___╯                     ╰___
+        └────────────────────────────── X
+                    ↑
+                  mean = median = mode
+
+
+Properties
+-----------
+1. Symmetric around the mean (μ)
+2. Mean = Median = Mode  (all at the centre)
+3. Bell-shaped PDF
+4. Total area under curve = 1
+5. Curve never touches the X-axis (extends to ±∞ in theory)
+6. Fully defined by just TWO parameters:
+     μ (mean)    — controls where the centre is
+     σ (std dev) — controls how wide/narrow the bell is
+
+   Narrow bell → small σ (values clustered tightly around mean)
+   Wide bell   → large σ (values spread far from mean)
+
+
+The Empirical Rule (68-95-99.7 Rule)
+--------------------------------------
+For any normal distribution:
+
+  ┌─────────────────────────────────────────────────────┐
+  │  μ ± 1σ  →  68% of data falls in this range        │
+  │  μ ± 2σ  →  95% of data falls in this range        │
+  │  μ ± 3σ  →  99.7% of data falls in this range      │
+  └─────────────────────────────────────────────────────┘
+
+  Visually:
+           99.7%
+  ├────────────────────────────────────────┤
+           95%
+    ├──────────────────────────────────┤
+           68%
+          ├────────────────────┤
+  ───┬────┬────┬────┬────┬────┬────────── X
+   μ-3σ μ-2σ μ-1σ  μ  μ+1σ μ+2σ μ+3σ
+
+  Example — height of adult men: μ=175cm, σ=6cm
+  68%  → between 169cm and 181cm
+  95%  → between 163cm and 187cm
+  99.7%→ between 157cm and 193cm
+
+
+Standard Normal Distribution (Z-distribution)
+-----------------------------------------------
+A special normal distribution with μ=0 and σ=1.
+
+Any normal variable X can be converted to standard normal Z:
+
+  Z = (X - μ) / σ
+
+  Z tells you: how many standard deviations away from the mean is X?
+
+  Z = 0    → exactly at the mean
+  Z = 1    → one σ above the mean
+  Z = -2   → two σ below the mean
+
+  Example — height: μ=175, σ=6
+  X = 181  →  Z = (181-175)/6 = 1.0   (1 SD above mean)
+  X = 163  →  Z = (163-175)/6 = -2.0  (2 SD below mean)
+
+
+Why Standardise?
+-----------------
+- All normal distributions, regardless of μ and σ, convert to the same Z distribution
+- One Z-table covers every normal distribution problem
+- Makes comparing variables on different scales possible
+  (e.g. height in cm vs weight in kg — both converted to Z)
+
+
+Using the Z-table
+------------------
+Z-table gives F(z) = P(Z ≤ z) — area to the LEFT of z.
+
+  P(Z ≤ 1.0)  = 0.8413   → 84.13% of values below z=1
+  P(Z ≤ -1.0) = 0.1587   → 15.87% of values below z=-1
+  P(Z ≤ 0)    = 0.5000   → 50% below mean (symmetric)
+
+Common probability queries:
+
+  P(Z ≤ z)       = F(z)                    ← look up directly
+  P(Z > z)       = 1 - F(z)               ← complement
+  P(a < Z < b)   = F(b) - F(a)            ← range
+  P(Z ≤ -z)      = 1 - F(z)               ← symmetry of normal curve
+
+
+Worked Example
+---------------
+Heights of men: μ = 175cm, σ = 6cm. Find P(X < 181). => means prob of ht less that 181 cm => area under curve left of x=181       
+
+  Step 1 — standardise:
+  Z = (181 - 175) / 6 = 1.0
+
+  Step 2 — look up Z-table:
+  P(Z ≤ 1.0) = 0.8413
+
+  Answer: 84.13% of men are shorter than 181cm.
+
+---
+Find P(169 < X < 187):
+
+  Z1 = (169 - 175) / 6 = -1.0  →  F(-1.0) = 0.1587
+  Z2 = (187 - 175) / 6 =  1.0  →  F(1.0)  = 0.8413
+
+  P(169 < X < 187) = F(1.0) - F(-1.0)
+                   = 0.8413 - 0.1587
+                   = 0.6827 ≈ 68%   ← matches empirical rule ✓
+
+
+Connection to Previous Topics
+------------------------------
+  Binomial (discrete, large n)  →  approximates Normal as n increases
+  Central Limit Theorem         →  sample means follow normal distribution
+                                    regardless of original distribution
+  Z-score                       →  same idea as standardising data in ML
+                                    (feature scaling / normalisation)
+
+  In ML:
+  - Many algorithms assume normally distributed errors (linear regression)
+  - Outlier detection uses Z-scores (Z > 3 = outlier)
+  - Gaussian Naive Bayes assumes features are normally distributed
+
+If the variable is normally distributed, and even if you do not know the values of µ and σ,
+ you can calculate the value of P(X < µ + σ) using the empirical rule and the symmetric property of the normal distribution.
+ Here, P(X < µ + σ) = P(X < µ) + P(µ < X < µ + σ) = 0.5 + 0.68/2 = 0.5 + 0.34 = 0.84 = 84%.
+ Hence, irrespective of the values of µ and σ, P(X < µ + σ) for a normal distribution will always be 84%.
+
+
+Key Z values to memorise
+--------------------------
+  Z      F(z)    Right tail   Used for
+  ─────  ──────  ───────────  ──────────────────────────
+  0      0.5000  0.5000       mean — splits 50/50
+  1.0    0.8413  0.1587       68% empirical rule (±1σ)
+  1.65   0.9505  0.0495       90% interval (±1.65σ)
+  1.96   0.9750  0.0250       95% confidence interval
+  2.0    0.9772  0.0228       95% empirical rule approx (±2σ)
+  2.576  0.9950  0.0050       99% confidence interval
+  3.0    0.9987  0.0013       99.7% empirical rule (±3σ)
+
+  Symmetry shortcut: F(-z) = 1 - F(z)
+  Symmetric interval: P(-z < Z < z) = 2×F(z) - 1
+
+  Z=1.96 vs Z=2.0:
+  - ±2σ (empirical rule) → covers 95.44%  (rough approximation)
+  - Z=1.96              → covers exactly 95.00% (use for CI / hypothesis testing)
+
+
+WORKED EXERCISES — Paracetamol Tablet Problem
+===============================================
+Setup:
+  X = amount of paracetamol per tablet ~ Normal(μ=500mg, σ=50mg)
+  Permissible error = 10% of 500 = 50mg
+  Acceptable range: 450mg to 550mg
+  Below 450mg → quality issue (ineffective)
+  Above 550mg → regulatory issue
+
+  Visual:
+       16%  |    34%   |   34%   |  16%
+  ──────────┼──────────┼─────────┼──────────
+           450        500       550
+          (μ-σ)       (μ)      (μ+σ)
+
+Q1. What % of tablets are within the permissible range (450–550 mg)?
+  450 = μ - 1σ = 500 - 50
+  550 = μ + 1σ = 500 + 50
+  Limits fall exactly at ±1σ → empirical rule directly
+  P(450 < X < 550) = 68%
+
+Q2. What % of tablets are a quality issue (< 450 mg)?
+  P(X < 450) = P(Z < -1) = 0.5 - 0.34 = 16%
+  Or: F(-1) = 1 - F(1) = 1 - 0.8413 = 0.1587 ≈ 16%
+
+Q3. What % of tablets are a regulatory issue (> 550 mg)?
+  By symmetry with Q2:
+  P(X > 550) = P(X < 450) = 16%
+  Sanity check: 16% + 68% + 16% = 100% ✓
+
+Q4. If σ = 25 mg instead, what % fall within the permissible range?
+  450 = 500 - 50 = μ - 2σ  (since 2×25 = 50)
+  550 = 500 + 50 = μ + 2σ
+  Limits now at ±2σ → empirical rule: P = 95%
+
+  Key insight:
+  σ=50 → limits at ±1σ → 68% within range
+  σ=25 → limits at ±2σ → 95% within range
+  Smaller σ = tighter manufacturing = more tablets within acceptable range.
+
+Q5. With σ=50, a batch of 10,000 tablets is produced. How many are rejected?
+  Rejected = outside 450–550 = 32% of batch
+  Expected rejections = 0.32 × 10,000 = 3,200 tablets
+
+
+Q6. Batch Z2: μ=510mg, σ=20mg. P(tablet < 550mg)?
+  X = 550 is the threshold being tested — where does 550 sit on this distribution?
+
+  Step 1 — standardise (X = 550 is the value you plug in):
+  Z = (X - μ) / σ = (550 - 510) / 20 = 40/20 = 2.0
+
+  Step 2 — Z-table:
+  P(X < 550) = F(2.0) = 0.9772
+
+  Answer: 98%
+
+  Note: mean shifted to 510 (above 500), so 550 is now only 2σ above the mean.
+  More tablets fall below 550 compared to the original μ=500 setup.
+
+
+Q7. Batch Z2: μ=510, σ=20. P(X > 450)?
+  Z = (450 - 510) / 20 = -60/20 = -3.0   ← 450 is 3σ below the mean
+
+  P(X > 450) = 1 - F(-3.0) = F(3.0) = 0.9987 ≈ 99.87%
+
+  Empirical rule approach:
+  P(X > 450) = 0.5 + 0.997/2 = 0.9985 ≈ 99.85%
+
+  Common mistake: 1 - (0.5 + 0.997/2) = 0.0015 → this gives P(X < 450), not P(X > 450)
+
+  Visual:
+       0.15%  |←────────── 99.85% ──────────────→|
+  ────────────┼────────────────────────────────────
+             450                              μ=510
+            (μ-3σ)
+
+
+Q8. Batch Y4: μ=505, σ=25. P(450 < X < 550)?
+  Limits are NOT symmetric around μ=505:
+    450 is 55mg below mean → Z1 = (450-505)/25 = -2.2
+    550 is 45mg above mean → Z2 = (550-505)/25 = +1.8
+
+  Z-table (empirical rule cannot be used — unequal distances):
+    F(1.8)  = 0.9641
+    F(-2.2) = 1 - F(2.2) = 1 - 0.9861 = 0.0139
+
+  P(450 < X < 550) = F(1.8) - F(-2.2)
+                   = 0.9641 - 0.0139
+                   = 0.9502 ≈ 95%
+
+  Visual:
+       1.39%    ←────── 95% ──────→     3.59%
+  ─────────────┼──────────────────────┼──────────
+              450         505         550
+             Z=-2.2       (μ)        Z=+1.8
+
+  Sanity check: 1.39% + 95.02% + 3.59% = 100% ✓
+  Right tail larger (3.59%) because 550 is closer to mean than 450 is.
+
+
+Q9. Astronomical Error — Gaussian Distribution (origin of normal distribution)
+  X = astronomical error ~ Normal(μ=0, σ=1000 km)
+  μ=0 means on average the astronomer is perfectly accurate — errors cancel out.
+  Find: P(overestimate by 2330 km or more) = P(X ≥ 2330)
+
+  Overestimate = positive error → X ≥ 2330
+
+  Step 1 — standardise:
+  Z = (2330 - 0) / 1000 = 2.33
+
+  Step 2 — Z-table:
+  F(2.33) = 0.9901
+  P(X ≥ 2330) = 1 - F(2.33) = 1 - 0.9901 = 0.0099 ≈ 1%
+
+  Visual:
+                              │← 1% →│
+  ────────────────────────────┼────────
+              μ=0            2330
+                             Z=2.33
+
+  Only 1% chance of overestimating by 2330 km or more.
+  2330 km sits 2.33 standard deviations above the mean.

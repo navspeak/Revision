@@ -1,0 +1,469 @@
+Addition Rule (OR)  
+====
+ Q1. In a deck of 52 cards, what is the probability of drawing a King or a Heart?  
+
+ P(King) = 4/52, P(Heart) = 13/52, P(King and Heart) = 1/52
+ P(King or Heart) = 4/52 + 13/52 - 1/52 = 16/52 =4/13
+
+Q2. P(A) = 0.4, P(B) = 0.3, P(A and B) = 0.1. Find P(A or B).     
+
+ P(A or B) = 0.4 + 0.3 - 0.1 = 0.6                                                                                                                   
+                  
+Q3. Two mutually exclusive events: P(A) = 0.25, P(B) = 0.45. Find P(A or B).  = 0.7   
+                                                                                                                                                                                   
+
+Multiplication Rule (AND)
+===
+                           
+Q4. A fair coin is tossed 3 times. What is the probability of getting Heads all 3 times?
+=> P(Heads) =1/2^3 = 1/8 = 12.5%
+                                                                                                                                                                                          
+Q5. P(A) = 0.5, P(B) = 0.6. A and B are independent. Find P(A and B).   => 0.30                                                                                                               
+                                                                                                                                                                                          
+Q6. A bag has 5 red, 3 blue balls. You draw one ball, put it back, then draw again. What is the probability both draws are red? 
+=>5/8*5/8                                                        
+                  
+  ---                                                                                                                                                                                     
+  Mixed (decide which rule to apply)
+                                    
+  Q7. A student passes Math with probability 0.7 and passes Science with probability 0.6. What is the probability they pass both? (assume independent)
+  =? 0.42
+
+
+
+  Q8. P(A) = 0.5, P(B) = 0.4, P(A and B) = 0.2. Find P(A or B).      = 0.7                                                                                                                     
+                                                                                                                                                                                          
+  Q9. Rolling two dice — what is the probability of getting a 6 on the first or second die?                                                                                              
+    P(6 on die 1) = 1/6
+    P(6 on die 2) = 1/6                                                                                                                                                                     
+    P(6 on both)  = 1/6 × 1/6 = 1/36   ← the overlap you missed                                                                                                                             
+                                                                                                                                                                                            
+    P(6 on first OR second) = 1/6 + 1/6 − 1/36                                                                                                                                              
+                            = 6/36 + 6/36 − 1/36                                                                                                                                            
+                            = 11/36 ≈ 0.306 (30.6%) 
+  ========================
+
+  For independent events:                                                                                                                                                                 
+  P(A and B) = P(A) × P(B)
+                                                                                                                                                                                          
+  For dependent events:
+  P(A and B) = P(A) × P(B|A)                                                                                                                                                              
+  "Probability of A happening, then B happening given A already happened."
+                                                                                                                                                                                          
+  ---                                                                                                                                                                                     
+  Example — Q2 from above (without replacement):
+                                                                                                                                                                                          
+  - P(1st red) = 4/10
+  - P(2nd red | 1st was red) = 3/9 ← only 3 red left out of 9 remaining                                                                                                                   
+                                                                                                                                                                                          
+  P(both red) = 4/10 × 3/9 = 12/90 = 2/15 ≈ 13.3%                                                                                                                                         
+                                                                                                                                                                                          
+  Compare with with replacement (independent):                                                                                                                                            
+  P(both red) = 4/10 × 4/10 = 16/100 = 4/25 = 16%                                                                                                                                         
+                                                                                                                                                                                          
+  ---                                                                                                                                                                                     
+  The rule of thumb:
+                                                                                                                                                                                          
+  ┌──────────────┬────────────────────────────┐
+  │  Situation   │          Formula           │
+  ├──────────────┼────────────────────────────┤                                                                                                                                           
+  │ Independent  │ P(A and B) = P(A) × P(B)   │
+  ├──────────────┼────────────────────────────┤                                                                                                                                           
+  │ Dependent    │ P(A and B) = P(A) × P(B|A) │
+  ├──────────────┼────────────────────────────┤                                                                                                                                           
+  │ Given P(A|B) │ P(A and B) = P(B) × P(A|B) │
+  └──────────────┴────────────────────────────┘                                                                                                                                           
+                  
+   ---                                                                                                                                                                                     
+  Q1. In a group of 200 people: 120 drink Tea, 80 drink Coffee, 40 drink both.
+  - a) What is P(Tea | Coffee)? (given they drink Coffee, what's the chance they also drink Tea?)  
+           P(T|C) = P(T and C) / P(C) = (40/200) / (80/200) = .20/.4 = 50%                                                                                    
+  - b) What is P(Coffee | Tea)?    = (40/200)  / (120 /200) = 33.3%                                                          
+                                                                                                                                                                                          
+  ---                                                                                                                                                                                     
+  Q2. A bag has 4 red and 6 blue balls. You draw one ball without replacement, then draw another.                                                                                         
+  What is the probability the second ball is red, given the first was red?  
+  ===========================================================================================    
+ "the second ball is red, given the first was red"  => P(2nd Red | 1st Red) = 3/9    
+                                                                                    
+    Key distinction:                                                                                                                                                                        
+                  
+  ┌──────────────────────┬───────────────────────────────────┬────────────────────┐
+  │       Question       │              Formula              │       Answer       │                                                                                                       
+  ├──────────────────────┼───────────────────────────────────┼────────────────────┤
+  │ P(both red)          │ P(1st red) × P(2nd red | 1st red) │ 4/10 × 3/9 = 13.3% │                                                                                                       
+  ├──────────────────────┼───────────────────────────────────┼────────────────────┤
+  │ P(2nd red | 1st red) │ Just 3/9                          │ 33.3%              │                                                                                                       
+  └──────────────────────┴───────────────────────────────────┴────────────────────┘  
+  how is it different to say both balls are red vs 2nd red given 1st is also red. Both appears to mean we want 1st ans 2nd to be Red                                                                                     
+
+● Great question — this is the core of conditional probability. Both situations do end up with two red balls, but the difference is what you already know when you're asking the question.
+
+  ---
+  P(both red) — asked before any draw
+
+  You're standing in front of the bag. Nothing has happened yet. You're asking:
+
+  ▎ "What are the chances I get lucky twice in a row?"
+
+  Both draws are uncertain. You could draw blue first. You could draw blue second. You need to account for ALL of that uncertainty.
+
+  P(2nd red | 1st red) — asked after the first draw
+
+  The first ball has already been pulled out, and you're holding a red ball in your hand. That uncertainty is gone. Now you're asking:
+
+  ▎ "The first one is done — it was red. Now what are my chances on this next draw?"
+
+  ---
+  The math shows the difference:
+
+  P(both red)          = 4/10  ×  3/9  =  12/90  ≈ 13.3%
+  P(2nd red | 1st red) =            3/9  =  30/90  ≈ 33.3%
+
+  P(both red) is much smaller because it also bakes in the 6/10 chance the first ball could have been blue. The conditional strips that out — it says "forget the first draw, it's settled."
+
+  ---
+  Analogy: Imagine a friend bets you $10 that you'll flip heads twice in a row.
+
+  - Before any flip: your chance is 1/4 (25%) — that's the joint probability
+  - After you've already flipped heads once: your chance is now 1/2 (50%) — that's the conditional
+                                                                                                                                                                                                                         
+  Same two flips, same outcome (heads + heads), but completely different question depending on when you're asking.                    
+  ---                                                                                                                                                                                     
+  Q3. P(A) = 0.6, P(B) = 0.5, P(A and B) = 0.3. Find:
+  - a) P(A | B)    = > P(A and B) = P(B)* P(A|B)  => 0.3/0.5  =0.6                                                                                                                                                                   
+  - b) P(B | A)   =0.3/0.6 = 0.5
+  - c) Are A and B independent? How can you tell?  => In as P(A) = P(A|B) and P(B) = P(B|A)  
+                                                                                                                                                                                                                          
+  Way 2 — multiplication check (faster in practice):                                                                                                                                                                     
+  If independent: P(A and B) should equal P(A) × P(B)                                                                                                                                                                    
+                  0.6 × 0.5 = 0.3  ✓  (matches given P(A and B))                                                                                                                                  
+                  
+  ---                                                                                                                                                                                     
+  Q4 (harder). A factory has two machines:
+  - Machine X produces 60% of items, with a 2% defect rate                                                                                                                                
+  - Machine Y produces 40% of items, with a 5% defect rate
+                                                                                                                                                                                          
+  An item is picked at random and found to be defective. What is the probability it came from Machine Y?   
+
+  P(X) = 0.6 P(D|X) = 0.02 
+  P(Y) = 0.4 P(D|Y) = 0.05    
+
+  P(Y|D) = ?    
+
+  P(Y and  D)  = P(D)P(Y|D)   
+
+  P(D) = P(D|X)*P(X) +   P(D|Y)*P(y)   = 0.02*.6 + 0.05* .4 = 0.032
+  P(Y and D) = P(Y)  * P(D|Y) = P(D) * P(Y|D)      
+             => 0.400 * 0.05 = 0.032  * P(Y|D)
+             => P(Y|D) = (400*0.05)/32= 62.5  
+
+  ---                                                                                                                                                                                                                    
+  What you need is Bayes' Theorem:                                                                                                                                                                                       
+                                                                                                                                                                                                                         
+  P(Y|D) = P(Y and D) / P(D)
+                                                                                                                                                                                                                         
+  You have the numerator. The missing piece is P(D) — the total probability of picking a defective item from either machine.                                                                                             
+                                                                                                                                                                                                                         
+  ---                                                                                                                                                                                                                    
+  Step 1 — P(D) using Total Probability:
+  P(D) = P(D|X)×P(X)  +  P(D|Y)×P(Y)                                                                                                                                                                                     
+       = 0.02 × 0.6   +  0.05 × 0.4 
+       = 0.012         +  0.020                                                                                                                                                                                          
+       = 0.032
+  So 3.2% of all items are defective.                                                                                                                                                                                    
+                                     
+  Step 2 — Apply Bayes':                                                                                                                                                                                                 
+  P(Y|D) = P(Y) × P(D|Y)  /  P(D)                                                                                                                                                                                        
+          =    0.020        /  0.032
+          =   62.5%                                                                                                                                                                                                      
+                  
+  ---                                                                                                                                                                                                                    
+  Intuition check: Machine Y only makes 40% of items, but its defect rate (5%) is much higher than X's (2%). 
+  So when you find a defective item, it's more likely to have come from Y than its 40% share suggests — 62.5%
+  vs 40%. The high defect rate "pulls" the blame toward Y.                                                                                                                                                               
+                  
+  ---                                                                                                                                                                                                                    
+  The pattern for all Bayes questions:                                                                                                                                                                                 
+                                                                                                                                                                                                                         
+  P(cause | effect) = P(cause) × P(effect | cause)
+                      ─────────────────────────────                                                                                                                                                                      
+                             P(effect)                                                                                                                                                                                 
+                                                                                                                                                                                                                         
+  Where P(effect) = sum over all causes of P(cause) × P(effect | cause).
+
+  ========================
+  BAYES' THEOREM EXERCISES
+  ========================
+
+  Q1. Medical Test (classic)
+  A disease affects 1% of the population.
+  A test for it is 95% accurate if you have the disease.
+  The test also has a 5% false positive rate (flags healthy people as sick).
+  You test positive. What is the probability you actually have the disease?
+
+  P(Disease) = Prior = 0.01                                                                                                                                                                                              
+  P(No Disease) = complement = 0.99                                                                                                                                                                                      
+  P(Test Positive | Disease) = Likelihood = 0.95 (true positive)                                                                                                                                                         
+  P(Test Positive | don't have disease) = 0.05 (false positive)                                                                                                                                                          
+  P(Disease | Test positive) = Posterior = ?                                                                                                                                                                             
+  =[ P(disease) *P(Test positive | have disease)] / P(Test Positive)]                                                                                                                                                    
+  = (0.01*0.95)/(0.95*0.01 + 0.05*0.99)                                                                                                                                                                                  
+  where, P(Test positive) = P(Test Positive | Disease) * P(Disease) + P(Test Positive | don't have disease) * P(Don't have disease)     = 16.1%
+
+ Because even though the false positive rate is only 5%, there are so many healthy people that a small percentage of a large group overwhelms a large percentage of a tiny group.                                       
+                                                            
+  Think of it concretely with 10,000 people:                                                                                                                                                                             
+   
+  Sick people    (1%  of 10,000) =   100                                                                                                                                                                                 
+  Healthy people (99% of 10,000) = 9,900                                                                                                                                                                                 
+                                                                                                                                                                                                                         
+  True positives:  100  × 0.95 =    95  (sick and test positive)                                                                                                                                                         
+  False positives: 9900 × 0.05 =   495  (healthy but test positive)                                                                                                                                                      
+                                                                                                                                                                                                                         
+  Total positives = 95 + 495 = 590                                                                                                                                                                                       
+                                                                                                                                                                                                                         
+  P(actually sick | tested positive) = 95 / 590 = 16.1%                                                                                                                                                                  
+● Because even though the false positive rate is only 5%, there are so many healthy people that a small percentage of a large group overwhelms a large percentage of a tiny group.
+
+  Think of it concretely with 10,000 people:
+
+  Sick people    (1%  of 10,000) =   100
+  Healthy people (99% of 10,000) = 9,900
+
+  True positives:  100  × 0.95 =    95  (sick and test positive)
+  False positives: 9900 × 0.05 =   495  (healthy but test positive)
+
+  Total positives = 95 + 495 = 590
+
+  P(actually sick | tested positive) = 95 / 590 = 16.1%
+
+  So when you test positive, you're in a pool of 590 people. Only 95 of them are actually sick. The other 495 are false alarms — healthy people caught by that 5% error rate.
+
+  The key lesson — Base Rate Neglect:
+  People hear "95% accurate" and assume a positive test means ~95% chance you're sick. But the prior (only 1% have the disease) dominates. 
+  The rarity of the disease means false positives vastly outnumber true positives.
+
+  This is why doctors order a second confirmatory test after a positive result — Bayes tells you to update again with the new evidence.
+
+
+
+  Q2. Three Agents (call centre)
+  A call centre has 3 agents:
+  - Agent A handles 50% of calls, with a 20% failure rate
+  - Agent B handles 30% of calls, with a 30% failure rate
+  - Agent C handles 20% of calls, with a 40% failure rate
+  A complaint is received about an unresolved call.
+  What is the probability it came from Agent C?
+
+ P(C | fail) = P(C) × P(fail | C)                                                                                                                                                                                       
+                ───────────────────────────────────────────────                                                                                                                                                          
+                P(A)×P(fail|A) + P(B)×P(fail|B) + P(C)×P(fail|C)                                                                                                                                                         
+                                                                                                                                                                                                                         
+              = (0.20 × 0.40)                                                                                                                                                                                            
+                ─────────────────────────────────────────                                                                                                                                                                
+                (0.50×0.20) + (0.30×0.30) + (0.20×0.40)                                                                                                                                                                  
+                                                                                                                                                                                                                         
+              = 0.08 / 0.27 = 29.6%                                                                                                                                                                                      
+                                              
+
+  Q3. Spam Filter
+  - 30% of all emails are spam.
+  - 90% of spam emails contain the word "FREE".
+  - 10% of legitimate emails also contain "FREE".
+  An email arrives containing the word "FREE".
+  What is the probability it is spam?
+
+ P(Spam | FREE) = P(Spam) × P(FREE | Spam)                                                                                                                                                                              
+                   ─────────────────────────────────────────────                                                                                                                                                         
+                   P(FREE|Spam)×P(Spam) + P(FREE|No Spam)×P(No Spam)
+                                                                                                                                                                                                                         
+                 = (30 × 90) / (90×30 + 10×70)              
+                 = 2700 / (2700 + 700)                                                                                                                                                                                   
+                 = 2700 / 3400                                                                                                                                                                                           
+                 = 79.4%
+
+  ================================
+  CONTINGENCY TABLE EXERCISES
+  ================================
+  (Each cell is a joint. Row/column totals are marginals. Slicing gives conditional/Bayes.)
+
+  Q1. India vs Sachin (original)
+
+                     India Win    India Lose    Total
+  Sachin Century        10            2        12
+  No Century            50           38        88
+  Total                 60           40       100
+
+  a) P(India Win AND Sachin Century)         ← joint       = cell / grand total = 10/100
+  b) P(Sachin Century)                       ← marginal    = row total / grand total = 12/100
+  c) P(India Win | Sachin Century)           ← conditional = cell / row total =  "Given Century row (12 total), what fraction won?"  = 10/12
+  d) P(Sachin Century | India Win)           ← conditional = cell / col total = 10/60
+  e) Are India Win and Sachin Century independent? How can you tell? No. 
+  Way 1 — conditional check:
+    P(Win)             = 60/100 = 0.60                                                                                                                                                                                   
+    P(Win | Century)   = 10/12  = 0.833                                                                                                                                                                                  
+    0.60 ≠ 0.833  → not independent                                                                                                                                                                                      
+                                                                                                                                                                                                                         
+  Way 2 — multiplication check:                                                                                                                                                                                          
+    P(Win) × P(Century) = 0.60 × 0.12 = 0.072               
+    P(Win AND Century)  = 10/100 = 0.10                                                                                                                                                                                  
+    0.072 ≠ 0.10  → not independent      
+
+
+  Q2. Customer Purchase
+
+  Survey of 200 customers — did they see the ad? did they buy?
+
+            Bought    Did Not Buy    Total
+  Saw Ad       80          20          100
+  No Ad        40          60          100
+  Total       120          80          200
+
+  a) P(Bought AND Saw Ad) = 80/200 = 40%
+  b) P(Bought | Saw Ad) = 80%
+  c) P(Saw Ad | Bought) = 80/120 =  67%        ← Bayes: given they bought, did they see the ad?
+  d) Did seeing the ad affect buying behaviour? (independence check)
+
+P(B) =60%
+P(S) = 50%
+P(S and B) =40 % <> P(B)*P(S) = 30%
+                       
+  Conclusion: The ad did affect buying behaviour. People who saw the ad bought at 80% vs only 40% for those who didn't — the ad doubled the purchase rate.     
+ P(Bought | Saw Ad)  = 80/100 = 80%                                                                                                                                                                                     
+  P(Bought | No Ad)   = 40/100 = 40%                                                                                                                                                                                     
+                                                                                                                                                                                                                         
+  The gap between these two (80% vs 40%) is exactly what "the ad affected behaviour" means in numbers. 
+
+  Q3. Weather vs Commute
+
+  500 days of data:
+
+               Train Late    Train On Time    Total
+  Raining           45             55          100
+  Not Raining       30            370          400
+  Total             75            425          500
+
+  a) P(Train Late) = 75/500 = 15%
+  b) P(Raining AND Train Late) = 45/500 = 9%
+  c) P(Train Late | Raining) = 45/100 = 45%
+  d) P(Raining | Train Late)  = 45/75 = 9/15 =3/5 = 60   ← Bayes: it's late — what's the probability it was raining?
+  e) Is rain independent of train being late?
+
+P(Raining) = 100/500
+P(Late) = 75 /500
+P(Raining and Late) = 45 /500 <> 100/500*75/500
+
+  ========================
+  HOW BAYES DIFFERS FROM OTHER PROBABILITY
+  ========================
+
+  The four types — what question each answers:
+
+    Marginal:     P(Train Late) = 75/500          "How often does X happen?"
+    Joint:        P(Raining AND Late) = 45/500    "How often do both happen together?"
+    Conditional:  P(Late | Raining) = 45/100      "Given I know something, how likely is X?"
+    Bayes:        P(Raining | Late) = 45/75       "I see the effect — what caused it?"
+
+  Marginal, joint, and conditional move FORWARD — you know the situation, ask about outcome.
+  Bayes moves BACKWARD — you see the outcome, ask what caused it.
+
+  ● In the weather example:
+
+  Effect  =  Train is Late        ← this is what you observed                                                                                                                                                            
+  Cause   =  Was it Raining?      ← this is what you're working backwards to find                                                                                                                                        
+                                                                                                                                                                                                                         
+  So P(Raining | Late) reads as:                                                                                                                                                                                         
+                                                                                                                                                                                                                         
+  ▎ "The train is already late. What is the probability that rain caused it?"                                                                                                                                            
+                                                            
+  You're not predicting whether the train will be late. It's already late. You're now investigating — looking back at what most likely produced that outcome.                                                            
+                                                            
+  Same pattern across all your exercises:                                                                                                                                                                                
+                                                            
+  Medical:  Effect = positive test result    Cause = do I actually have the disease?
+  Factory:  Effect = defective item          Cause = which machine made it?                                                                                                                                              
+  Spam:     Effect = email contains "FREE"   Cause = is it spam?
+
+  ---
+  The key difference — same exercises, opposite direction:
+
+  ┌──────────────┬──────────────────────────────────┬─────────────────────────────────────┐
+  │ Exercise     │ Forward question                 │ Bayes question                      │
+  ├──────────────┼──────────────────────────────────┼─────────────────────────────────────┤
+  │ Factory      │ Machine X has 2% defect rate     │ Item IS defective — which machine?  │
+  │ Medical      │ Test is 95% accurate             │ Test IS positive — do I have it?    │
+  │ Spam         │ 90% of spam has "FREE"           │ Email HAS "FREE" — is it spam?      │
+  │ Cricket      │ Sachin's century rate            │ India DID win — did Sachin century? │
+  │ Weather      │ Rain causes 45% late rate        │ Train IS late — was it raining?     │
+  └──────────────┴──────────────────────────────────┴─────────────────────────────────────┘
+
+  ---
+  Why Bayes needs the prior (and others don't):
+
+  Conditional P(Late | Raining) only needs the rain rows — doesn't care how often it rains.
+  Bayes P(Raining | Late) needs to know how often it rains — because you're looking at the
+  late column and asking how much was caused by rain vs other reasons. Without the prior,
+  you can't split the blame.
+
+  This is why P(A|B) ≠ P(B|A):
+    P(Late | Raining) = 45/100 = 45%   ← of rainy days, how often late
+    P(Raining | Late) = 45/75  = 60%   ← of late days, how often rainy
+  Same cell, completely different question.
+
+  ---
+  The formula is just this logic written down:
+
+    P(Cause | Effect) =        what cause contributes to this effect
+                        ────────────────────────────────────────────
+                           total ways this effect could have happened
+
+  The denominator (total probability) is what makes Bayes different — it forces you to
+  account for ALL possible causes before assigning credit to one.
+
+  ---
+  One line summary:
+
+  All other probability tells you how likely something is going forward.
+  Bayes tells you — given something already happened — what most likely caused it.
+
+  Everything you've learned maps directly into ML. Here's how:                                                                                                                                                           
+                                                                                                                                                                                                                       
+  ---                                                                                                                                                                                                                    
+  1. Naive Bayes Classifier — your spam filter, scaled up
+                                                                                                                                                                                                                         
+  Your Q3 was literally how a spam filter works. In ML, Naive Bayes classifies emails, sentiment, medical diagnosis — any "given these features, what class is it?" problem.
+                                                                                                                                                                                                                         
+  P(Spam | "FREE", "CLICK", "WIN") ∝ P(Spam) × P("FREE"|Spam) × P("CLICK"|Spam) × P("WIN"|Spam)
+  Same formula, more features.                                                                                                                                                                                           
+                                                            
+  ---                                                                                                                                                                                                                    
+  2. Training a model = updating the prior with data        
+                                                                                                                                                                                                                         
+  Every ML model is doing a version of:
+  Prior belief (before data)  →  see training data  →  Posterior belief (your model)                                                                                                                                     
+  The model starts with some assumption, sees examples, and shifts its belief — exactly what Bayes describes.
+                                                                                                                                                                                                                         
+  ---                                                                                                                                                                                                                    
+  3. Class imbalance = the medical test problem                                                                                                                                                                          
+                                                                                                                                                                                                                         
+  Your Q1 showed that 95% test accuracy means only 16% posterior when disease is rare. In ML, this is the class imbalance problem:
+                                                                                                                                                                                                                         
+  - Fraud detection: 99.9% transactions are legit                                                                                                                                                                        
+  - Cancer screening: most patients are healthy                                                                                                                                                                          
+                                                                                                                                                                                                                         
+  A model that ignores the prior (base rate) will look accurate but fail completely on the rare class — same trap as ignoring the 1% disease prevalence.                                                                 
+   
+  ---                                                                                                                                                                                                                    
+  4. What the model output actually means                   
+                                         
+  When a model says "80% probability this is a cat" — that IS a posterior:
+  P(cat | pixel values) = P(cat) × P(pixels | cat) / P(pixels)                                                                                                                                                           
+  The model has learned the likelihoods from training data and combines them with base rates to give you that number.
+                                                                                                                                                                                                                         
+  ---                                                                                                                                                                                                                    
+  One line:                                                                                                                                                                                                              
+                                                                                                                                                                                                                         
+  ▎ Bayes is the mathematical foundation of how ML models learn from data, handle uncertainty, and produce probability outputs — especially when classes are rare or data is limited.
+                                                                                                                                                                                                                         
+             

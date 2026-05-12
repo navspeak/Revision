@@ -1,0 +1,216 @@
+PROBABILITY DENSITY FUNCTIONS & CONTINUOUS DISTRIBUTIONS
+=========================================================
+
+PMF (Probability Mass Function).
+
+  ┌──────────────────────┬─────────────────────┬────────────────────┐
+  │                      │      Discrete       │     Continuous     │
+  ├──────────────────────┼─────────────────────┼────────────────────┤
+  │ Exact probability    │ PMF — P(X = x)      │ Not defined (= 0)  │
+  ├──────────────────────┼─────────────────────┼────────────────────┤
+  │ Cumulative           │ CDF — step function │ CDF — smooth curve │
+  ├──────────────────────┼─────────────────────┼────────────────────┤
+  │ "Density" equivalent │ PMF                 │ PDF                │
+  └──────────────────────┴─────────────────────┴────────────────────┘
+
+  The word "mass" vs "density" reflects the difference:
+  - Mass — probability is concentrated at specific points (like lumps of mass)
+  - Density — probability is spread continuously across a range (like density of a fluid)
+
+
+Why Continuous Variables Need a Different Approach
+----------------------------------------------------
+For discrete variables (balls, patients, packets):
+  - X takes countable values: 0, 1, 2, 3...
+  - P(X = exact value) makes sense
+  - Plotted as bar chart
+
+For continuous variables (time, weight, temperature):
+  - X can take ANY value in a range: 21, 21.1, 21.01, 21.001...
+  - P(X = exact value) = 0   ← probability of hitting one exact point is zero
+  - Must ask P(a < X < b) — probability over an INTERVAL
+  - Plotted as a curve
+
+
+PDF — Probability Density Function
+------------------------------------
+A function where the AREA UNDER THE CURVE gives the probability.
+
+  P(a < X < b) = area under PDF curve between a and b
+
+  Key properties:
+  - Total area under the entire curve = 1
+  - P(X = exact value) = 0  (area of a single line = 0)
+  - Never goes below 0
+
+  Example: daily commute time
+  P(20 < X < 28) = area under PDF between 20 and 28
+
+
+CDF — Cumulative Distribution Function
+----------------------------------------
+Plots cumulative probability of X against X.
+
+  F(x) = P(X ≤ x) = area under PDF from the leftmost value up to x
+
+  Example: area under the PDF from 20 (minimum) to 28 gives F(28)
+
+  Key properties:
+  - Always starts at 0, ends at 1
+  - Always non-decreasing (never goes down)
+  - For continuous variables: a smooth curve (not a bar chart)
+
+
+PDF vs CDF
+-----------
+  PDF                             CDF
+  ──────────────────────────────  ──────────────────────────────
+  Shows density at each point     Shows cumulative probability
+  Area under curve = probability  Height at x = P(X ≤ x)
+  Can go above 1 (it's density)   Always between 0 and 1
+  Used to find P(a < X < b)       Used to find P(X ≤ x) directly
+
+  Note: PDF headline in lecture is "PDFs vs CDFs" (not CDFs vs PDFs)
+
+
+Discrete CDF vs Continuous CDF
+--------------------------------
+Discrete (e.g. red balls, n=4):
+  - Cumulative probability is a STEP FUNCTION (bar chart)
+  - P(X) doesn't change between 3 and 3.9999 — stays at F(3) = 0.9744
+  - Only changes at integer values: 0, 1, 2, 3, 4
+
+Continuous (e.g. daily commute time):
+  - Cumulative probability is a SMOOTH CURVE
+  - F(21) ≠ F(21.1) ≠ F(21.2) — different value at every point
+  - Changes continuously across the entire range
+
+
+Key Rule
+---------
+  Discrete  →  use PMF (bar chart) + CDF (step function)
+  Continuous →  use PDF (curve) + CDF (smooth curve)
+
+  For continuous: NEVER ask P(X = exact value). Always ask P(a < X < b).
+
+
+Graphs
+-------
+Continuous (e.g. commute time):
+
+  PDF (density)                    CDF (cumulative)
+  │                                │                        ___
+  │        ╭───╮                   │                   ____/
+  │       ╭╯   ╰╮                  │              ____/
+  │      ╭╯     ╰╮                 │         ____/
+  │   ╭──╯       ╰──╮              │    ____/
+  │___╯             ╰___           │___/
+  └──────────────────── X          └──────────────────── X
+    area = probability               height = P(X ≤ x)
+    total area = 1                   starts 0, ends 1
+
+Discrete (e.g. red balls 0–4):
+
+  PMF (mass)                       CDF (step function)
+  │                                │                   ┌──── 1.00
+  │      █                         │               ┌───┘
+  │      █   █                     │          ┌────┘    0.97
+  │  █   █   █                     │     ┌────┘
+  │  █   █   █   █                 │┌────┘
+  │  █   █   █   █   █             │
+  └──0───1───2───3───4── X         └──0───1───2───3───4── X
+    P(X=x) at each point             flat between integers
+                                     jumps only at integer values
+
+  Key visual difference:
+  - PDF/PMF → shape of distribution
+  - CDF     → always climbs from 0 to 1, never dips
+
+
+UNIFORM DISTRIBUTION (Continuous)
+===================================
+
+What it is
+-----------
+All possible values have the same probability density.
+The PDF is a flat horizontal line — a rectangle.
+
+Finding the PDF height h
+-------------------------
+Since total area under curve = 1, and area = length × height:
+
+  For X = 0 to 10:
+  10 × h = 1  →  h = 0.1
+
+  PDF value = 0.1 for all x in [0, 10]
+
+  PDF graph:
+  │
+  0.1├──────────────────────
+  │
+  └──0──────────────────10── X
+
+
+Finding Cumulative Probability (CDF)
+--------------------------------------
+F(x) = area under PDF from 0 to x = h × x
+
+  Example: F(0.5) = 0.1 × 0.5 = 0.05
+
+  CDF graph (straight diagonal line):
+  1 │                    /
+    │                   /
+    │                  /
+    │                 /
+  0 └──0──────────10── X
+
+
+PDF vs CDF — Which to Use?
+----------------------------
+PDFs are more commonly used in real-life analysis.
+
+Reason: patterns are much easier to see in a PDF than a CDF.
+
+  Uniform distribution:
+  - PDF → flat line  ← immediately shows uniformity
+  - CDF → diagonal line  ← no obvious pattern
+
+  Symmetric distribution:
+  - PDF → bell shape  ← symmetry is obvious
+  - CDF → S-curve  ← symmetry is harder to spot
+
+  Rule: Use PDF to understand the shape/pattern of the distribution.
+        Use CDF to answer probability questions (P(X ≤ x)).
+
+
+P(X < x) vs P(X ≤ x) — Continuous vs Discrete
+-------------------------------------------------
+Continuous variable (e.g. height, time, weight):
+  P(X = exact value) = 0   ← probability of one exact point is zero
+
+  Therefore:
+  P(X ≤ 175.3) = P(X < 175.3)   ← both are equal, endpoint doesn't matter
+
+  F(175.3) = P(X ≤ 175.3) = P(X < 175.3)
+
+  Example — bowler height:
+  F(175.3 cm) = 0.3  means:
+  → P(X ≤ 175.3) = 0.3   ✓
+  → P(X < 175.3) = 0.3   ✓  (both correct — height is continuous)
+  → 30% of 5-wicket hauls were taken by bowlers 175.3 cm or shorter
+
+Discrete variable (e.g. number of balls, wickets):
+  P(X = exact value) ≠ 0
+
+  Therefore:
+  P(X ≤ 3) ≠ P(X < 3)
+
+  P(X ≤ 3) = P(X < 3) + P(X = 3)   ← differ by P(X=3)
+
+  Example — red balls (n=4, p=0.4):
+  P(X < 3)  = 0.8208
+  P(X ≤ 3)  = 0.9744   ← differ by P(X=3) = 0.1536
+
+Summary:
+  Continuous → P(X ≤ x) = P(X < x)   endpoint makes no difference
+  Discrete   → P(X ≤ x) ≠ P(X < x)   endpoint matters

@@ -1,0 +1,100 @@
+PMF — Discrete
+                                                                                                                                                                                                        
+  Bag has 2 red, 3 blue balls. Draw 1 ball. X = number of red balls drawn.
+                                                                                                                                                                                                        
+  ┌─────┬───────────┐
+  │  X  │   P(X)    │                                                                                                                                                                                   
+  ├─────┼───────────┤                                       
+  │ 0   │ 3/5 = 0.6 │
+  ├─────┼───────────┤
+  │ 1   │ 2/5 = 0.4 │
+  └─────┴───────────┘                                                                                                                                                                                   
+   
+  - P(X = 0) = 0.6 — directly the probability, no calculation needed                                                                                                                                    
+  - P(X = 1) = 0.4                                          
+  - Sum = 1.0 ✓                                                                                                                                                                                         
+                                                            
+  This is PMF — a table of exact probabilities for each possible value.      
+
+PDF — Continuous     
+======================                                                                                                                                                                                 
+                                                                                                                                                                                                      
+  Commute time X is uniformly distributed between 20 and 60 minutes.                                                                                                                                    
+   
+  PDF height h = 1/(60-20) = 1/40 = 0.025                                                                                                                                                               
+                                                                                                                                                                                                        
+  PDF graph:
+  │                                                                                                                                                                                                     
+  0.025├─────────────────────────                           
+  │                                                                                                                                                                                                     
+  └──20─────────────────────60── X
+                                                                                                                                                                                                        
+  Unlike PMF, this 0.025 is NOT a probability — it's density.                                                                                                                                           
+   
+  To get probability, you need an interval:                                                                                                                                                             
+                                                            
+  P(20 < X < 30) = 0.025 × (30-20) = 0.025 × 10 = 0.25
+  P(30 < X < 45) = 0.025 × (45-30) = 0.025 × 15 = 0.375                                                                                                                                                 
+  P(X = 35)      = 0   ← exact point, no width, no area        
+
+  Every minute in the range 20–60 is equally likely to be the commute time."                                                                                                                           
+   
+  More specifically — the commuter is equally likely to arrive at 25 min, 35 min, 47 min, or any other value. No particular time is more likely than another.                                           
+                                                            
+  The density 0.025 tells you the "spread rate" — since the probability is spread evenly across 40 minutes, each minute gets an equal share:                                                            
+                                                            
+  1 (total probability) ÷ 40 (minutes) = 0.025 per minute                                                                                                                                               
+                                                                                                                                                                                                        
+  So in plain English:
+  - P(arrives in any 10-min window) = 0.025 × 10 = 25% — same window, same chance                                                                                                                       
+  - P(arrives in any 20-min window) = 0.025 × 20 = 50%                                                                                                                                                  
+  - No window is "luckier" than another of the same width
+                                                                                                                                                                                                        
+  It's the continuous version of rolling a fair die — every outcome equally likely, just instead of 6 discrete faces, you have an infinite number of points across [20, 60].                                                                                                                                         
+                                                                                                                                                                                                        
+  Key difference from PMF:                                                                                                                                                                              
+  - PMF: P(X = x) is meaningful                                                                                                                                                                         
+  - PDF: f(x) = 0.025 is just height — you always need height × width to get probability                                                                                                                
+                                                            
+ CDF — works for both discrete and continuous      
+ =============================================                                                                                                                                                    
+                                                            
+  Using the same commute time example (uniform, 20 to 60 min):                                                                                                                                          
+   
+  F(x) = P(X ≤ x) = area under PDF from 20 up to x                                                                                                                                                      
+       = 0.025 × (x - 20)                                                                                                                                                                               
+  
+  ┌─────┬───────────────────────┬───────────────────────┐                                                                                                                                               
+  │  x  │ F(x) = P(commute ≤ x) │      In English       │   
+  ├─────┼───────────────────────┼───────────────────────┤                                                                                                                                               
+  │ 20  │ 0.025 × 0 = 0.00      │ 0% arrive by 20 min   │   
+  ├─────┼───────────────────────┼───────────────────────┤
+  │ 30  │ 0.025 × 10 = 0.25     │ 25% arrive by 30 min  │                                                                                                                                               
+  ├─────┼───────────────────────┼───────────────────────┤                                                                                                                                               
+  │ 40  │ 0.025 × 20 = 0.50     │ 50% arrive by 40 min  │                                                                                                                                               
+  ├─────┼───────────────────────┼───────────────────────┤                                                                                                                                               
+  │ 50  │ 0.025 × 30 = 0.75     │ 75% arrive by 50 min  │   
+  ├─────┼───────────────────────┼───────────────────────┤                                                                                                                                               
+  │ 60  │ 0.025 × 40 = 1.00     │ 100% arrive by 60 min │   
+  └─────┴───────────────────────┴───────────────────────┘                                                                                                                                               
+  
+  CDF graph:                                                                                                                                                                                            
+  1.00│                    /                                
+      │                   /                                                                                                                                                                             
+  0.50│          /
+      │         /                                                                                                                                                                                       
+      │        /                                            
+  0.00└──20───30───40───50───60── X
+                                                                                                                                                                                                        
+  Answering questions directly from CDF:
+                                                                                                                                                                                                        
+  P(X ≤ 35)        = F(35) = 0.025 × 15 = 0.375                                                                                                                                                         
+  P(X > 45)        = 1 - F(45) = 1 - 0.625 = 0.375
+  P(30 < X ≤ 50)   = F(50) - F(30) = 0.75 - 0.25 = 0.50                                                                                                                                                 
+                                                                                                                                                                                                        
+  ---                                                                                                                                                                                                   
+  All three together now make sense?                                                                                                                                                                    
+  - PMF → exact probability for discrete                                                                                                                                                                
+  - PDF → density, need area for probability
+  - CDF → cumulative probability, answer range questions directly                                                                                                                                       
+                                                            

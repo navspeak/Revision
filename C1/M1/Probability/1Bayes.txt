@@ -1,0 +1,173 @@
+BAYES' THEOREM
+==============
+
+Where it comes from
+-------------------
+You already know:
+
+  P(A and B) = P(A) × P(B|A)      ... (1)
+  P(A and B) = P(B) × P(A|B)      ... (2)
+
+Since both equal P(A and B), set them equal:
+
+  P(B) × P(A|B) = P(A) × P(B|A)
+
+Rearrange to solve for P(A|B):
+
+  P(A|B) = P(A) × P(B|A)
+            ──────────────
+                P(B)
+
+That is Bayes' Theorem. Nothing new — just conditional probability rearranged.
+
+
+The Formula
+-----------
+
+  P(A|B) = P(A) × P(B|A)
+            ──────────────
+                P(B)
+
+
+The Four Components (by name)
+------------------------------
+
+  ┌─────────────────┬──────────────────────────────────────────────────────────────┐
+  │ Term            │ Meaning                                                      │
+  ├─────────────────┼──────────────────────────────────────────────────────────────┤
+  │ P(A|B)          │ Posterior — what you want to find. Probability of the cause  │
+  │                 │ AFTER you've seen the evidence.                              │
+  ├─────────────────┼──────────────────────────────────────────────────────────────┤
+  │ P(A)            │ Prior — your belief about the cause BEFORE seeing evidence.  │
+  ├─────────────────┼──────────────────────────────────────────────────────────────┤
+  │ P(B|A)          │ Likelihood — how probable is the evidence IF the cause is    │
+  │                 │ true?                                                        │
+  ├─────────────────┼──────────────────────────────────────────────────────────────┤
+  │ P(B)            │ Evidence (Marginal) — total probability of seeing this       │
+  │                 │ evidence regardless of cause. Computed via Total Probability │
+  └─────────────────┴──────────────────────────────────────────────────────────────┘
+
+  In words:
+
+  Posterior = (Prior × Likelihood) / Evidence
+
+
+The Law of Total Probability (how to compute P(B))
+----------------------------------------------------
+When there are multiple mutually exclusive causes (X, Y, Z...) that cover all possibilities:
+
+  P(B) = P(B|X)×P(X) + P(B|Y)×P(Y) + P(B|Z)×P(Z) + ...
+
+  For just two causes:
+  P(B) = P(B|A)×P(A) + P(B|not A)×P(not A)
+
+This is always the denominator in Bayes. It is the weighted average of the
+likelihood across all possible causes.
+
+
+Full Bayes Template (two causes)
+----------------------------------
+
+  P(A|B) =           P(A) × P(B|A)
+            ─────────────────────────────────────────────
+            P(A) × P(B|A)  +  P(not A) × P(B|not A)
+
+
+When to use Bayes
+------------------
+Use Bayes when:
+- You observe an EFFECT and want to find the probability of the CAUSE.
+- The question says "given it is defective / positive / true ... what is the
+  probability it came from X / has disease / is spam?"
+
+Signal words: "given that it is ..., what is the probability it came from ..."
+
+
+Reading the problem — what maps to what
+-----------------------------------------
+
+  ┌───────────────────────────────────────────┬────────────────────────────────┐
+  │ Problem gives you                         │ Maps to                        │
+  ├───────────────────────────────────────────┼────────────────────────────────┤
+  │ "Machine X makes 60% of items"            │ P(X) = 0.6   ← Prior          │
+  ├───────────────────────────────────────────┼────────────────────────────────┤
+  │ "Machine X has a 2% defect rate"          │ P(D|X) = 0.02 ← Likelihood    │
+  ├───────────────────────────────────────────┼────────────────────────────────┤
+  │ "Item is defective. Where did it come     │ P(X|D) = ?  ← Posterior       │
+  │  from?"                                   │                (what you find) │
+  ├───────────────────────────────────────────┼────────────────────────────────┤
+  │ Total probability of any defective item   │ P(D) = ?   ← Evidence         │
+  │ (you compute this)                        │                (denominator)   │
+  └───────────────────────────────────────────┴────────────────────────────────┘
+
+
+Step-by-step approach for any Bayes problem
+--------------------------------------------
+1. Identify all causes and their priors:      P(X), P(Y), ...
+2. Identify the likelihoods:                  P(evidence | each cause)
+3. Compute joint probabilities (numerators):  P(X) × P(D|X), P(Y) × P(D|Y), ...
+4. Sum all joints → that is P(D):             denominator
+5. Divide the cause's joint by P(D):          P(X|D) = joint_X / P(D)
+
+Note: all numerators must sum to 1 when divided by P(D). Use this as a sanity check.
+
+
+Worked Example (factory problem)
+----------------------------------
+  Machine X: P(X) = 0.6, P(D|X) = 0.02
+  Machine Y: P(Y) = 0.4, P(D|Y) = 0.05
+  Find: P(Y|D)
+
+  Step 1 — joints (numerators):
+    P(X and D) = 0.6 × 0.02 = 0.012
+    P(Y and D) = 0.4 × 0.05 = 0.020
+
+  Step 2 — total P(D):
+    P(D) = 0.012 + 0.020 = 0.032
+
+  Step 3 — posteriors:
+    P(X|D) = 0.012 / 0.032 = 37.5%
+    P(Y|D) = 0.020 / 0.032 = 62.5%
+
+  Sanity check: 37.5% + 62.5% = 100% ✓
+
+  Interpretation: Machine Y only produces 40% of items, but because its defect
+  rate is much higher, a defective item is more likely (62.5%) to have come
+  from Y than X.
+
+
+Key Intuition
+--------------
+Bayes updates your belief. You start with a prior (what you thought before).
+Evidence arrives. Bayes tells you how much to shift your belief given that evidence.
+
+  Prior belief  →  see evidence  →  Posterior belief
+
+High likelihood means the evidence strongly "votes" for that cause. The prior
+acts as a weight — a rare cause needs very strong evidence to become probable.
+
+
+The parallel is:                                                                                                                                                                                                       
+   
+  Bayes                          Hypothesis Testing                                                                                                                                                                      
+  ─────────────────────────────────────────────────                                                                                                                                                                      
+  Prior P(Disease)           →   Base rate / null hypothesis
+  False positive rate 5%     →   Significance level α (p < 0.05)                                                                                                                                                         
+  P(Disease | Test Positive) →   What you actually want to know                                                                                                                                                          
+                                                                                                                                                                                                                         
+  The exact same problem shows up in hypothesis testing. 
+  When you get p < 0.05, most people think "95% chance my result is real." 
+  But that's wrong — just like thinking "95% accurate test = 95% chance you're sick."    
+                                                                                                                                                                                                                         
+  The true probability your result is real depends on:                                                                                                                                                                   
+  - How likely the effect was to exist before you ran the experiment (the prior)
+  - Your false positive rate (α)                                                                                                                                                                                         
+  - Your test's power (true positive rate, like the 95% in Q1)
+                                                                                                                                                                                                                         
+  This is called the False Discovery Rate problem — if you test 100 unlikely hypotheses and use p < 0.05, you'd expect 5 false positives just by chance. 
+  If only a few hypotheses were actually true, most of your       
+  "significant" results are noise.                                                                                                                                                                                       
+                                                                                                                                                                                                                         
+  It's why the replication crisis in science happened — researchers ran tests without accounting for the base rate of true effects in their field, same error as ignoring the 1% disease prevalence.                     
+                                                            
+  So yes — Bayes and hypothesis testing are the same underlying idea, just framed differently.     

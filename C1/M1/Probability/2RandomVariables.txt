@@ -1,0 +1,144 @@
+RANDOM VARIABLES & PROBABILITY DISTRIBUTIONS
+============================================
+
+What is a Random Variable
+--------------------------
+An experiment produces outcomes. A random variable converts those outcomes to
+numbers so you can do math on them.
+
+  Outcome (qualitative)       →   Random Variable X (quantitative)
+  ──────────────────────────────────────────────────────────────────
+  Customer defaults           →   X = 1
+  Customer doesn't default    →   X = 0
+
+  Coin flip Heads             →   X = 1
+  Coin flip Tails             →   X = 0
+
+  Sum of two dice             →   X = 2, 3, 4, ... 12
+
+Without this conversion, you can't compute probabilities, means, or run any
+statistical model. The random variable X basically converts outcomes of
+experiments to something measurable.
+
+
+Bank Example (from course)
+---------------------------
+As a data analyst at a bank, you want to predict which customers will default
+on their loan.
+
+  Before random variable (mixed types — hard to process):
+  ┌──────────┬────────────┬───────────┬────────────┬────────────┐
+  │ Customer │ Income     │ Loan Due  │ Dependents │ Default?   │
+  ├──────────┼────────────┼───────────┼────────────┼────────────┤
+  │ 1        │ ₹10 lakh   │ ₹75 lakh  │ 3          │ Yes        │
+  │ 2        │ ₹15 lakh   │ ₹50 lakh  │ 2          │ No         │
+  │ 3        │ ₹20 lakh   │ ₹40 lakh  │ 1          │ No         │
+  └──────────┴────────────┴───────────┴────────────┴────────────┘
+
+  Define X:   X = 1 if customer defaults,   X = 0 if not
+
+  After random variable (fully quantified — ready for analysis):
+  ┌──────────┬────────────┬───────────┬────────────┬────────────┐
+  │ Customer │ Income     │ Loan Due  │ Dependents │ X          │
+  ├──────────┼────────────┼───────────┼────────────┼────────────┤
+  │ 1        │ ₹10 lakh   │ ₹75 lakh  │ 3          │ 1          │
+  │ 2        │ ₹15 lakh   │ ₹50 lakh  │ 2          │ 0          │
+  │ 3        │ ₹20 lakh   │ ₹40 lakh  │ 1          │ 0          │
+  └──────────┴────────────┴───────────┴────────────┴────────────┘
+
+Now the table is entirely numeric → statistical analysis becomes possible.
+
+
+Two Types of Random Variables
+-------------------------------
+
+Discrete:
+  Takes countable, separate values. There are gaps between values.
+  Examples: number of defaults (0, 1, 2...), dice roll (1–6), coin flips
+
+Continuous:
+  Takes any value within a range. No gaps.
+  Examples: income, loan amount, temperature, height, time
+
+  ┌────────────┬─────────────────────────────┬──────────────────────────────┐
+  │            │ Discrete                    │ Continuous                   │
+  ├────────────┼─────────────────────────────┼──────────────────────────────┤
+  │ Values     │ Countable (0, 1, 2, 3...)   │ Any value in a range         │
+  │ Example    │ Number of loan defaults     │ Yearly income                │
+  │ Probability│ P(X = x) — exact value      │ P(a < X < b) — range only    │
+  │ Tool       │ PMF (probability mass fn)   │ PDF (probability density fn) │
+  └────────────┴─────────────────────────────┴──────────────────────────────┘
+
+  Key point for continuous variables: P(X = exactly 50000) = 0.
+  You can only ask P(49000 < X < 51000).
+
+
+Probability Distribution
+--------------------------
+Lists every possible value of X and the probability of each.
+It is the complete picture of how probabilities are spread across outcomes.
+
+  Example — fair die:
+  ┌───────┬──────────────┐
+  │ X     │ P(X)         │
+  ├───────┼──────────────┤
+  │ 1     │ 1/6          │
+  │ 2     │ 1/6          │
+  │ 3     │ 1/6          │
+  │ 4     │ 1/6          │
+  │ 5     │ 1/6          │
+  │ 6     │ 1/6          │
+  └───────┴──────────────┘
+  Rule: all probabilities must sum to 1.
+
+
+Expected Value (Mean)
+----------------------
+The average outcome if you repeated the experiment many times.
+Not the most likely outcome — the long-run average.
+
+  Formula (discrete):
+  E(X) = Σ x × P(X = x)
+       = x1×P(x1) + x2×P(x2) + ...
+
+  Example — fair die:
+  E(X) = 1×(1/6) + 2×(1/6) + 3×(1/6) + 4×(1/6) + 5×(1/6) + 6×(1/6)
+       = 21/6 = 3.5
+
+  You will never roll a 3.5 — but over thousands of rolls, the average
+  converges to 3.5.
+
+  For the bank example (X = default):
+  If P(default) = 0.2:
+  E(X) = 1×0.2 + 0×0.8 = 0.2
+  Meaning: on average, 20% of customers default.
+
+
+Variance and Standard Deviation
+---------------------------------
+Variance measures how spread out the values are around the expected value.
+
+  Var(X) = E[(X - μ)²] = Σ (x - μ)² × P(X = x)
+  SD(X)  = √Var(X)
+
+  High variance → outcomes are spread far from the mean (unpredictable)
+  Low variance  → outcomes are clustered near the mean (predictable)
+
+  For the bank: high variance in defaults means risk is hard to predict.
+
+
+The Three-Step Process (UpGrad game / any distribution problem)
+----------------------------------------------------------------
+1. Find all possible outcomes (the sample space)
+2. Find the probability of each outcome → build the distribution
+3. Use the distribution to compute E(X), Var(X), and answer business questions
+
+Once you have the distribution, everything else follows from it.
+
+
+Common Distributions (covered next)
+-------------------------------------
+  Bernoulli   — one trial, two outcomes (default / no default)
+  Binomial    — n independent Bernoulli trials (how many defaults in 100 customers?)
+  Normal      — continuous, bell-shaped (income, height, errors)
+  Poisson     — count of events in fixed time/space (calls per hour)

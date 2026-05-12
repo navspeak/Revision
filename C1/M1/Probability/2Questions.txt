@@ -1,0 +1,39 @@
+The upcoming questions are based on the paragraph below.
+
+ 
+
+Let's say that Rajya Laxmi Bank has given student loans to 10,000 people. However, the government wants to ensure that the bank is not giving away very risky loans and, hence, wants to know the “Expected Loss” of the bank’s student loan portfolio.
+
+
+ 
+
+The expected loss is basically the expected value of the money lost by the bank due to people defaulting on their loans, i.e. not paying their EMIs.
+
+ 
+
+The data that the bank uses to calculate the expected loss, looks like this -
+
+ 
+
+Customer No.	Exposure at Default (in ₹ lakh)	Recovery (%)	Probability of Default
+00001	11.50	20%	0.007
+ 
+
+
+Here,
+
+Exposure at default (EAD) is the total money owed by the customer in case of default
+
+Recovery (R) is the percentage of the exposed money that the bank would be able to recover.
+
+For example, in the above example, the bank would recover 20% of the exposed money, i.e. 20%*11.5 = ₹2.3 lakh.
+
+Probability of default (PD) is the probability that the customer will default. This is calculated for each customer using a number of factors such as family income, university attended, etc.
+
+ 
+
+In fact, banks are also required to report the unexpected loss. If you want to read more on how the expected loss and unexpected loss are calculated, you can find that here.
+
+ 
+
+You can download the dataset to refer for the following questions from below.

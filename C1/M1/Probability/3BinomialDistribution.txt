@@ -1,0 +1,129 @@
+BINOMIAL DISTRIBUTION
+======================
+
+Conditions (ALL four must hold)
+---------------------------------
+1. Fixed number of trials (n)
+2. Each trial has exactly two outcomes — success or failure
+3. Probability of success (p) is constant across all trials
+4. Trials are independent
+
+  Applicable                              Not Applicable
+  ─────────────────────────────────────   ──────────────────────────────────────
+  Toss coin 20 times → count tails        Toss coin UNTIL heads (n not fixed)
+  Ask 200 people: older than 21? (Y/N)    Ask 200 people: how old are you? (not binary)
+  Draw 4 balls WITH replacement           Draw 4 balls WITHOUT replacement (p changes)
+
+
+Formula
+--------
+  P(X = r) = nCr × p^r × (1-p)^(n-r)
+
+  Where:
+    n   = total number of trials
+    r   = number of successes you want
+    p   = probability of success in one trial
+    nCr = n! / (r! × (n-r)!)  — number of ways to arrange r successes in n trials
+
+
+Worked Example — Car Licence Plate
+------------------------------------
+Last digit of a car licence plate is equally likely to be even or odd.
+You observe 10 cars. What is the probability that exactly 5 have an even last digit?
+
+  n = 10  (10 cars observed)
+  r = 5   (want exactly 5 even)
+  p = 0.5 (even or odd equally likely)
+
+  P(X = 5) = C(10,5) × (0.5)^5 × (0.5)^5
+
+  C(10,5) = 10! / (5! × 5!) = 252
+
+  P(X = 5) = 252 × (0.5)^10
+           = 252 / 1024
+           ≈ 0.246  (24.6%)
+
+
+Expected Value and Variance for Binomial
+------------------------------------------
+  E(X)   = n × p
+  Var(X) = n × p × (1-p)
+  SD(X)  = √(n × p × (1-p))
+
+  For the licence plate example:
+  E(X)   = 10 × 0.5 = 5        (expect 5 even plates on average)
+  Var(X) = 10 × 0.5 × 0.5 = 2.5
+  SD(X)  = √2.5 ≈ 1.58
+
+
+SAMPLE QUESTIONS
+=================
+
+Q1. A fair coin is tossed 8 times. What is the probability of getting exactly 3 heads?
+  n=8, r=3, p=0.5
+  P(X=3) = C(8,3) × (0.5)^3 × (0.5)^5
+          = 56 × (0.5)^8
+          = 56/256
+          ≈ 0.219  (21.9%)
+
+Q2. A call centre agent resolves 70% of calls successfully. Out of 5 calls, what is
+    the probability that exactly 4 are resolved?
+  n=5, r=4, p=0.7
+  P(X=4) = C(5,4) × (0.7)^4 × (0.3)^1
+          = 5 × 0.2401 × 0.3
+          = 5 × 0.07203
+          ≈ 0.360  (36.0%)
+
+Q3. A factory has a 10% defect rate. A batch of 6 items is inspected.
+    What is the probability of finding at most 1 defective item?
+  n=6, p=0.1
+  P(X ≤ 1) = P(X=0) + P(X=1)
+
+  P(X=0) = C(6,0) × (0.1)^0 × (0.9)^6 = 1 × 1 × 0.531 = 0.531
+  P(X=1) = C(6,1) × (0.1)^1 × (0.9)^5 = 6 × 0.1 × 0.590 = 0.354
+
+  P(X ≤ 1) = 0.531 + 0.354 = 0.885  (88.5%)
+  (This introduces Cumulative Probability — covered next)
+
+Q4. Is binomial applicable? Why / why not?
+  a) Rolling a die 10 times, counting how many times you get a 6     → YES (binary: 6 or not 6, fixed n, constant p)
+  b) Drawing cards without replacement until you get an Ace          → NO  (n not fixed, p changes each draw)
+  c) Surveying 50 people: do you own a car? (yes/no)                 → YES (binary, fixed n, independent)
+  d) Recording the exact score of 20 students in an exam             → NO  (not binary — many outcomes)
+
+
+Two Ways to Compute E(X) for Binomial — Both Give the Same Answer
+------------------------------------------------------------------
+Long way (from definition):
+  E(X) = Σ x · P(X=x)
+       = 0·P(X=0) + 1·P(X=1) + 2·P(X=2) + ... + n·P(X=n)
+
+Shortcut (closed-form):
+  E(X) = n × p
+
+The shortcut is the mathematical proof that the full sum always simplifies to n×p.
+
+Example — pasta packets (n=10, p=0.05):
+  Long way: 0·P(X=0) + 1·P(X=1) + ... + 10·P(X=10) = 0.5
+  Shortcut: 10 × 0.05 = 0.5  ✓
+
+Use the long way to understand what E(X) means.
+Use the shortcut to compute it fast.
+
+                                                            
+  def valid(data):                                                                                                                                                                                      
+      try:                                                  
+          n, k, p = data
+      except (TypeError, ValueError):
+          return False
+      return (isinstance(n, int) and isinstance(k, int) and isinstance(p, float)                                                                                                                        
+              and n >= k and 0 <= p <= 1)
+
+
+from scipy.stats import binom                                                                                                                                                                         
+                                                            
+  # P(X <= 2), n=10, p=0.4                                                                                                                                                                              
+  print(binom.cdf(2, n=10, p=0.4))
+  scipy only has cdf which does ≤. For <, shift by 1:                                                                                                                                                   
+   
+  P(X < 2) = P(X ≤ 1) = binom.cdf(1, n=10, p=0.4)    

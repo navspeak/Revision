@@ -1,0 +1,47 @@
+EXPECTED VALUE — ROULETTE EXAMPLE
+===================================
+
+Bet: £100 on a single number.
+Payout if win: 36× bet = £3,600  →  net +£3,500
+Loss: -£100
+
+European Roulette (0–36, 37 pockets)
+--------------------------------------
+P(win)  = 1/37
+P(lose) = 36/37
+
+E(X) = (1/37 × 3500) + (36/37 × -100)
+     = 3500/37 - 3600/37
+     = -100/37
+     ≈ -£2.70 per £100 bet
+
+House edge: 2.70%
+
+
+American Roulette (0, 00, 1–36, 38 pockets; player bets on 1–36 only)
+-----------------------------------------------------------------------
+P(win)  = 1/38
+P(lose) = 37/38
+
+E(X) = (1/38 × 3500) + (37/38 × -100)
+     = 3500/38 - 3700/38
+     = -200/38
+     ≈ -£5.26 per £100 bet
+
+House edge: 5.26%
+
+
+Key Insight
+-----------
+Fair payout for a 1/37 chance = 36:1 (net £3,600).
+Casino pays only 35:1 (net £3,500).
+The 0 pocket is never covered by any winning bet — that gap IS the house edge.
+American roulette adds 00, giving the house one extra uncovered pocket → edge doubles.
+
+Connection to Random Variables
+--------------------------------
+X = net winnings per spin  →  discrete random variable
+
+E(X) < 0 for every spin, every strategy, every system.
+No betting pattern changes the expected value — it is fixed by the payout structure.
+In the long run, the player always loses.

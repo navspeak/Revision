@@ -1,0 +1,141 @@
+EXERCISES — CONTINUOUS DISTRIBUTIONS, PDF, CDF, UNIFORM
+==========================================================
+
+SECTION A — PDF & Uniform Distribution
+========================================
+
+Q1. A continuous random variable X is uniformly distributed between 5 and 25.
+    a) What is the height h of the PDF?
+    b) What is P(10 < X < 15)?
+    c) What is F(20)?
+
+Q2. A bus arrives at a stop at a random time uniformly distributed between 8:00 and 8:30 (in minutes, X = 0 to 30).
+    a) What is the PDF height?
+    b) What is the probability the bus arrives before 8:10?
+    c) What is the probability it arrives between 8:15 and 8:25?
+
+Q3. A continuous random variable X has PDF height h = 0.25 over its range.
+    What is the range of X?
+
+Q4. True or False — explain why:
+    a) For a continuous variable, P(X = 5.0) = 0.02
+    b) For a continuous variable, P(X < 5) = P(X ≤ 5)
+    c) The total area under any PDF = 1
+    d) A PDF value can exceed 1
+
+
+SECTION B — CDF
+=================
+
+Q5. X is uniformly distributed between 0 and 20.
+    a) Write the formula for F(x)
+    b) Find F(8)
+    c) Find P(5 < X ≤ 12) using F(x)
+    d) Find P(X > 14) using F(x)
+
+Q6. You are given F(10) = 0.4 and F(15) = 0.7 for a continuous variable.
+    a) P(X ≤ 10) = ?
+    b) P(10 < X ≤ 15) = ?
+    c) P(X > 15) = ?
+
+Q7. Which of these is NOT a valid CDF? Why?
+    a) Starts at 0, ends at 1, always increasing
+    b) Starts at 0, ends at 1, decreases between x=3 and x=5
+    c) Starts at 0.2, ends at 1
+
+
+SECTION C — PDF vs CDF (Pattern Recognition)
+==============================================
+
+Q8. Match the graph shape to the distribution:
+    a) PDF is a flat horizontal line              → ____________
+    b) PDF is a symmetric bell shape              → ____________
+    c) CDF is a straight diagonal line            → ____________
+    d) CDF is an S-curve                          → ____________
+
+Q9. A data scientist plots the CDF of a variable and sees a straight diagonal line from 0 to 1.
+    What can she conclude about the distribution? Why?
+
+Q10. Why do analysts prefer PDFs over CDFs for exploratory analysis?
+     Give one example to support your answer.
+
+
+SECTION D — Mixed
+==================
+
+Q11. Commute time X is uniformly distributed between 20 and 60 minutes.
+     a) What is the PDF height?
+     b) P(commute < 30 min)?
+     c) P(30 ≤ commute ≤ 45)?
+     d) F(50) = ?
+     e) If the company flags employees who commute more than 50 minutes, what % are flagged?
+
+Q12. For a continuous variable X with PDF height 0.05 over [0, 20]:
+     a) Verify this is a valid PDF
+     b) Find P(X < 8)
+     c) Find P(4 < X < 12)
+
+Q13. Discrete vs Continuous — for each, state whether to use PMF or PDF, and CDF step or smooth:
+     a) Number of goals in a football match
+     b) Weight of a newborn baby
+     c) Number of calls received per hour
+     d) Temperature at noon each day
+
+
+ANSWERS
+========
+
+A1. a) h = 1/(25-5) = 1/20 = 0.05
+    b) P(10<X<15) = 0.05 × 5 = 0.25
+    c) F(20) = 0.05 × (20-5) = 0.75
+
+A2. a) h = 1/30 ≈ 0.033
+    b) P(X<10) = (1/30) × 10 = 0.333  (33.3%)
+    c) P(15<X<25) = (1/30) × 10 = 0.333
+
+A3. range = 1/0.25 = 4  (e.g. X in [0,4] or any interval of length 4)
+
+A4. a) FALSE — P(X = any exact value) = 0 for continuous variables
+    b) TRUE  — adding one point (probability 0) changes nothing
+    c) TRUE  — always
+    d) TRUE  — PDF is density, not probability; can exceed 1 (e.g. h=0.25 over [0,4] — wait, 0.25×4=1 ✓)
+               Example: uniform over [0, 0.5] → h = 2 > 1, but area = 2×0.5 = 1 ✓
+
+A5. a) F(x) = x/20  (h = 1/20 = 0.05, F(x) = 0.05 × x)
+    b) F(8) = 8/20 = 0.40
+    c) P(5 < X ≤ 12) = F(12) - F(5) = 12/20 - 5/20 = 7/20 = 0.35
+    d) P(X > 14) = 1 - F(14) = 1 - 14/20 = 6/20 = 0.30
+
+A6. a) 0.4
+    b) F(15) - F(10) = 0.7 - 0.4 = 0.30
+    c) 1 - F(15) = 1 - 0.7 = 0.30
+
+A7. b) is NOT valid — CDF can never decrease. Once probability accumulates, it cannot go back down.
+    c) is NOT valid — CDF must start at 0 (there is no probability before the minimum value).
+
+A8. a) Uniform distribution
+    b) Normal (symmetric) distribution
+    c) Uniform distribution
+    d) Normal (symmetric) distribution
+
+A9. Straight diagonal CDF → uniform distribution.
+    Because F(x) = h×x is linear only when h is constant — which is the definition of uniform.
+
+A10. PDFs show shape/pattern directly (flat=uniform, bell=normal, skewed=skewed).
+     CDFs always look similar (climbing from 0 to 1) — hard to distinguish distributions visually.
+     Example: uniform PDF is instantly recognisable as flat; its CDF looks like any other diagonal line.
+
+A11. a) h = 1/(60-20) = 1/40 = 0.025
+     b) P(X<30) = 0.025 × (30-20) = 0.025 × 10 = 0.25  (25%)
+     c) P(30≤X≤45) = 0.025 × 15 = 0.375  (37.5%)
+     d) F(50) = 0.025 × (50-20) = 0.025 × 30 = 0.75
+     e) P(X>50) = 1 - F(50) = 1 - 0.75 = 0.25  → 25% flagged
+
+A12. a) Area = 0.05 × 20 = 1.0 ✓ valid PDF
+     b) P(X<8) = 0.05 × 8 = 0.40
+     c) P(4<X<12) = 0.05 × (12-4) = 0.05 × 8 = 0.40
+
+A13. a) Goals → PMF, step CDF         (discrete — countable)
+     b) Weight → PDF, smooth CDF      (continuous)
+     c) Calls/hour → PMF, step CDF    (discrete — countable)
+     d) Temperature → PDF, smooth CDF (continuous)

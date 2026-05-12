@@ -1,0 +1,91 @@
+You saw the definition of probability, which is given as,
+
+Equation
+
+Then you learnt about some specific terms related to probability - events, sample space and experiments. You also learnt some basic rules of probability:
+
+Probability values always lie between 
+Probability values for all outcomes of an experiment always add up to Equation.
+Then you learnt about specific types of events that can be encountered while computing probabilities of more than two events. They are:
+
+Independent Events: If you have two or more events and the occurrence of one event has no bearing whatsoever on the occurrence/s of the other event/s, then all the events are said to be independent of each other.
+Disjoint or Mutually Exclusive Events: Now, two or more events are mutually exclusive when they do not occur at the same time; i.e., when one event occurs, the rest of the events do not occur.
+You also learnt about the idea of complement Equation for any event A and the probability rule for them, i.e. Equation.
+
+After that, you were introduced to the 2 main rules of probability that help you in finding the probabilities of 2 or more events. They are:
+
+Addition Rule:  When you have the individual probabilities of two events A and B, denoted by Equation and Equation, the addition rule states that the probability of the event that either A or B will occur is given by
+EquationEquation
+
+where EquationEquationEquation
+denotes the probability that either event A or event B occurs. 
+
+              Equation denotes the probability that only event A occurs
+
+              Equation denotes the probability that only event B occurs
+
+              EquationEquationEquation denotes the probability that both events A and B occur simultaneously.
+
+Multiplication Rule: When an event A is not dependent on event B and vice versa, they are known as independent events. And the multiplication rule allows us to compute the probabilities of both of them occurring simultaneously, which is given as
+
+EquationEquation
+
+Now, this rule can be extended to multiple independent events, where all you need to do is multiply the respective probabilities of all the events to get the final probability of all of them occurring simultaneously. For example, if you have four independent events A, B, C and D, then
+
+EquationEquation
+
+Finally, you also saw a comparison between the addition rule and multiplication rule that would help you to decide which formula to use in a given scenario. If the question mentions an 'OR' to denote the relationship between the events, then the rule that you need to apply is the addition rule. That is, either of the given events can occur at that time, P(Event A or Event B). Else, if an 'AND' is used to denote the relationship between the events, then the multiplication rule is used. Here, the events need to happen simultaneously and must be independent, P(Event A and Event B).
+
+We can use three approaches for generating the likelihood of an event:
+
+Equal Likelihood Approach
+
+Relative Frequency Approach
+
+Judgemental Approach
+
+The following are the important types of probability: 
+
+Marginal Probability: It is the probability of an event, independent of another event happening simultaneously.
+
+Joint Probability: It is the probability of two or more events happening simultaneously.
+
+Conditional Probability: It is the probability that an event occurs as a result of some other event that has already occurred.
+
+Having revised the fundamentals, we will discuss conditional probability and Bayes' Theorem next.
+====
+ These are the three core probability types. Here's a concrete example to anchor all three together:
+                                                                                                                                                                                          
+  ---                                                                                                                                                                                     
+  Scenario: 100 students, some play Cricket, some play Football.                                                                                                                          
+                                                                                                                                                                                          
+  ┌──────────────────────┬────────────────┬───────────────────────┬───────┐
+  │                      │ Plays Football │ Doesn't play Football │ Total │                                                                                                               
+  ├──────────────────────┼────────────────┼───────────────────────┼───────┤
+  │ Plays Cricket        │ 20             │ 30                    │ 50    │                                                                                                               
+  ├──────────────────────┼────────────────┼───────────────────────┼───────┤
+  │ Doesn't play Cricket │ 10             │ 40                    │ 50    │                                                                                                               
+  ├──────────────────────┼────────────────┼───────────────────────┼───────┤
+  │ Total                │ 30             │ 70                    │ 100   │                                                                                                               
+  └──────────────────────┴────────────────┴───────────────────────┴───────┘                                                                                                               
+   
+  ---                                                                                                                                                                                     
+  Marginal Probability — just one event, ignore the other:
+  P(plays Cricket) = 50/100 = 0.5                                                                                                                                                         
+  P(plays Football) = 30/100 = 0.3
+                                                                                                                                                                                          
+  Joint Probability — both events simultaneously:
+  P(Cricket AND Football) = 20/100 = 0.2                                                                                                                                                  
+                       
+  Conditional Probability — one event given another already occurred:                                                                                                                     
+  P(Cricket | Football) = P(Cricket AND Football) / P(Football)
+                        = 0.2 / 0.3 = 0.667                                                                                                                                               
+  "Of the students who play Football, 66.7% also play Cricket."                                                                                                                           
+   
+  ---                                                                                                                                                                                     
+  Key insight — how they relate:
+                                                                                                                                                                                          
+  Joint = Marginal × Conditional
+  P(A and B) = P(B) × P(A|B)                                                                                                                                                              
+                       
+  This is the foundation of Bayes' Theorem, which is next in your recall file.       

@@ -1,0 +1,175 @@
+CUMULATIVE PROBABILITY DISTRIBUTION
+=====================================
+
+What it is
+-----------
+Instead of P(X = exact value), cumulative asks P(X ≤ k) or P(X < k).
+It answers "less than", "at most", "more than", "at least" type questions.
+
+
+How to Compute
+---------------
+Sum up individual probabilities:
+
+  P(X < 3)  = P(X=0) + P(X=1) + P(X=2)
+  P(X ≤ 3)  = P(X=0) + P(X=1) + P(X=2) + P(X=3)
+
+
+Key Variants
+-------------
+  Expression   Meaning              How to compute
+  ──────────   ──────────────────   ─────────────────────────
+  P(X < k)     strictly less than   sum up to k-1
+  P(X ≤ k)     less than or equal   sum up to k
+  P(X > k)     strictly greater     1 - P(X ≤ k)
+  P(X ≥ k)     greater or equal     1 - P(X ≤ k-1)
+
+
+Setup: Bag has 2 red, 3 non-red balls. Draw 4 times with replacement.
+  - n = 4, p = 2/5 = 0.4, (1-p) = 3/5 = 0.6          
+  The house decided:  ▎ "If the player draws fewer than 3 red balls, they lose their bet — and we keep the money."
+Worked Example — Red Balls (n=4, p=2/5)
+-----------------------------------------
+House wins if player gets < 3 red balls. What is the probability the house wins?
+
+ Using binomial formula: P(X=r) = C(4,r) × (0.4)^r × (0.6)^(4-r)                                                                                                                                       
+                                                                                                                                                                                                        
+  ---                                                       
+  Each row calculated:                                                                                                                                                                                  
+                                                            
+  P(X=0) = C(4,0) × (0.4)^0 × (0.6)^4 = 1 × 1     × 0.1296 = 0.1296
+  P(X=1) = C(4,1) × (0.4)^1 × (0.6)^3 = 4 × 0.4   × 0.216  = 0.3456                                                                                                                                     
+  P(X=2) = C(4,2) × (0.4)^2 × (0.6)^2 = 6 × 0.16  × 0.36   = 0.3456                                                                                                                                     
+  P(X=3) = C(4,3) × (0.4)^3 × (0.6)^1 = 4 × 0.064 × 0.6    = 0.1536                                                                                                                                     
+  P(X=4) = C(4,4) × (0.4)^4 × (0.6)^0 = 1 × 0.0256 × 1     = 0.0256                                                                                                                                     
+                                                                                                                                                                                                        
+  Sanity check: 0.1296 + 0.3456 + 0.3456 + 0.1536 + 0.0256 = 1.0 ✓     
+
+  X    P(X=x)    Cumulative P(X ≤ x)
+  ───  ────────  ────────────────────
+  0    0.1296    0.1296
+  1    0.3456    0.4752
+  2    0.3456    0.8208
+  3    0.1536    0.9744
+  4    0.0256    1.0000
+
+  P(X < 3) = P(X=0) + P(X=1) + P(X=2) = 0.8208
+
+  House wins 82.08% of the time.
+
+
+The Complement Trick — faster when k is large
+----------------------------------------------
+Instead of summing many terms from the left, subtract the few terms on the right:
+
+  P(X < 3) = 1 - P(X ≥ 3)
+            = 1 - [P(X=3) + P(X=4)]
+            = 1 - [0.1536 + 0.0256]
+            = 1 - 0.1792
+            = 0.8208  ✓
+
+Use direct sum when r is small. Use complement when r is large.
+
+
+Real-world Example — Employee Commute
+---------------------------------------
+"How many employees can get to work in less than 40 minutes?"
+→ This is a cumulative probability question: P(commute time < 40)
+→ For discrete: sum all P(X=x) for x = 0, 1, 2, ... 39
+→ For continuous: this leads to using area under a curve (covered in next session)
+
+
+F(X) — Cumulative Distribution Function (CDF)
+-----------------------------------------------
+F(x) = P(X ≤ x)
+
+The cumulative column in the table IS F(x):
+
+  F(0) = P(X ≤ 0) = 0.1296
+  F(1) = P(X ≤ 1) = 0.4752
+  F(2) = P(X ≤ 2) = 0.8208
+  F(3) = P(X ≤ 3) = 0.9744
+  F(4) = P(X ≤ 4) = 1.0000
+
+Difference between P(X) and F(X):
+
+  Notation   Name   Meaning
+  ────────   ────   ──────────────────────────────────────────
+  P(X = x)   PMF    probability at exactly that value
+  F(x)       CDF    probability up to and including that value
+
+Properties of F(X):
+  - Always starts at 0, ends at 1
+  - Never decreases — only goes up or stays flat
+
+
+Connection to Next Topic
+-------------------------
+Cumulative probability for continuous distributions uses the same logic
+but instead of summing, you compute the area under the PDF curve.
+P(X < k) for continuous = area to the left of k.
+
+==========
+● Yes — skip P entirely, use cumulative frequency directly:                                                                                                                                             
+                                                            
+  F(x) = cumulative frequency / total                                                                                                                                                                   
+   
+  ┌─────┬───────────┬──────────────────────┬────────────────┐                                                                                                                                           
+  │  X  │ Frequency │ Cumulative Frequency │      F(X)      │
+  ├─────┼───────────┼──────────────────────┼────────────────┤                                                                                                                                           
+  │ 0   │ 10        │ 10                   │ 10/100 = 0.10  │
+  ├─────┼───────────┼──────────────────────┼────────────────┤
+  │ 1   │ 30        │ 40                   │ 40/100 = 0.40  │                                                                                                                                           
+  ├─────┼───────────┼──────────────────────┼────────────────┤
+  │ 2   │ 40        │ 80                   │ 80/100 = 0.80  │                                                                                                                                           
+  ├─────┼───────────┼──────────────────────┼────────────────┤                                                                                                                                           
+  │ 3   │ 15        │ 95                   │ 95/100 = 0.95  │
+  ├─────┼───────────┼──────────────────────┼────────────────┤                                                                                                                                           
+  │ 4   │ 5         │ 100                  │ 100/100 = 1.00 │
+  └─────┴───────────┴──────────────────────┴────────────────┘                                                                                                                                           
+   
+  Then answer any question directly:                                                                                                                                                                    
+                                                            
+  P(X < 3)  = F(2) = 80/100  = 0.80
+  P(X ≤ 3)  = F(3) = 95/100  = 0.95                                                                                                                                                                     
+  P(X > 2)  = 1 - F(2) = 1 - 0.80 = 0.20
+                                                                                                                                                                                                        
+  In pandas:                                                
+                                                                                                                                                                                                        
+  df["Cumulative Freq"] = df["Frequency"].cumsum()          
+  total = df["Frequency"].sum()                                                                                                                                                                         
+   
+  # P(X < 3)                                                                                                                                                                                            
+  df.loc[df["X"] == 2, "Cumulative Freq"].values[0] / total 
+                                                                                                                                                                                                        
+  So: Frequency → cumsum → divide by total = F(X). P(X) is an intermediate step you can skip entirely.    
+
+  ● P(a < X ≤ b) = F(b) - F(a)                                                                                                                                                                            
+                                                                                                                                                                                                      
+  That's the general formula for any range.                                                                                                                                                             
+   
+  ---                                                                                                                                                                                                   
+  Why it works:                                             
+                                                                                                                                                                                                        
+  F(b) = P(X ≤ b)  →  everything up to b
+  F(a) = P(X ≤ a)  →  everything up to a                                                                                                                                                                
+                                                            
+  Difference = only what's between a and b                                                                                                                                                              
+                                                            
+  ---                                                                                                                                                                                                   
+  All variants:                                             
+
+  ┌──────────────┬─────────────────┐
+  │   Question   │     Formula     │
+  ├──────────────┼─────────────────┤
+  │ P(a < X ≤ b) │ F(b) - F(a)     │
+  ├──────────────┼─────────────────┤
+  │ P(a ≤ X ≤ b) │ F(b) - F(a-1)   │                                                                                                                                                                    
+  ├──────────────┼─────────────────┤
+  │ P(a < X < b) │ F(b-1) - F(a)   │                                                                                                                                                                    
+  ├──────────────┼─────────────────┤                                                                                                                                                                    
+  │ P(a ≤ X < b) │ F(b-1) - F(a-1) │
+  └──────────────┴─────────────────┘                                                                                                                                                                    
+                                                            
+  For your question:                                                                                                                                                                                    
+  P(1500 < X ≤ 1600) = F(1600) - F(1500)
