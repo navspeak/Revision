@@ -149,6 +149,36 @@ When chaining 3+ tables, prefer `ON` to stay explicit.
 
 ---
 
+### Self-join on salary table to compare student vs roommate salary
+
+To compare a value from two different rows in the same table, join that table **twice with two aliases**.
+
+```sql
+SELECT st.student_name
+FROM student st
+JOIN roommate rm    ON st.student_id  = rm.student_id
+JOIN salary   st_sa ON st.student_id  = st_sa.student_id   -- student's salary
+JOIN salary   rm_sa ON rm.roommate_id = rm_sa.student_id   -- roommate's salary
+WHERE st_sa.salary = rm_sa.salary
+ORDER BY st.student_id;
+```
+
+```
+salary joined twice:
+  st_sa  →  alias for student's salary row
+  rm_sa  →  alias for roommate's salary row
+WHERE st_sa.salary = rm_sa.salary  →  only keep pairs where salaries match
+```
+
+**Pattern:** any time you need to compare two rows from the same table — self-join with two aliases.
+
+**Common mistakes to avoid:**
+- Wrong column name: table has `student_name` not `name`
+- Missing `ORDER BY` when question asks for ordered output
+- Typos in table/column names (`roomate` vs `roommate`)
+
+---
+
 ### Facts are not always numeric
 
 The rule of thumb is numeric = fact, but the real test is **aggregatability**:
