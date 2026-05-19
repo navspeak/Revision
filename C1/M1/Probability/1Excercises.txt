@@ -97,7 +97,8 @@ Q6. A bag has 5 red, 3 blue balls. You draw one ball, put it back, then draw aga
   └──────────────────────┴───────────────────────────────────┴────────────────────┘  
   how is it different to say both balls are red vs 2nd red given 1st is also red. Both appears to mean we want 1st ans 2nd to be Red                                                                                     
 
-● Great question — this is the core of conditional probability. Both situations do end up with two red balls, but the difference is what you already know when you're asking the question.
+● Great question — this is the core of conditional probability. Both situations do end up with two red balls, 
+but the difference is what you already know when you're asking the question.
 
   ---
   P(both red) — asked before any draw

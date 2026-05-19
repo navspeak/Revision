@@ -119,6 +119,8 @@ Variance and Standard Deviation
 Variance measures how spread out the values are around the expected value.
 
   Var(X) = E[(X - μ)²] = Σ (x - μ)² × P(X = x)
+  Note: Var(X) for Bernoulli = p(1-p)
+  Note: Var(X) for Binomial = n.p(1-p)
   SD(X)  = √Var(X)
 
   High variance → outcomes are spread far from the mean (unpredictable)
@@ -142,3 +144,12 @@ Common Distributions (covered next)
   Binomial    — n independent Bernoulli trials (how many defaults in 100 customers?)
   Normal      — continuous, bell-shaped (income, height, errors)
   Poisson     — count of events in fixed time/space (calls per hour)
+
+| Concept             | Formula                 | Meaning                  |
+| ------------------- | ----------------------- | ------------------------ |
+| Variance            | (E[(X-\mu)^2])          | spread around mean       |
+| Variance (discrete) | (\sum (x-\mu)^2 P(X=x)) | same idea in sum form    |
+| Bernoulli variance  | (p(1-p))                | single trial uncertainty |
+| Binomial variance   | (np(1-p))               | sum of n trials          |
+| Std deviation       | (\sqrt{Var(X)})         | spread in original units |
+

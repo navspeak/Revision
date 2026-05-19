@@ -119,14 +119,14 @@ Worked Example (factory problem)
   Find: P(Y|D)
 
   Step 1 — joints (numerators):
-    P(X and D) = 0.6 × 0.02 = 0.012
+    P(X and D) = 0.6 × 0.02 = 0.012 
     P(Y and D) = 0.4 × 0.05 = 0.020
 
-  Step 2 — total P(D):
+  Step 2 — total P(D): = P(D|X)*P(X) + P(D|Y)*P(Y) =
     P(D) = 0.012 + 0.020 = 0.032
 
   Step 3 — posteriors:
-    P(X|D) = 0.012 / 0.032 = 37.5%
+    P(X|D) = 0.012 / 0.032 = 37.5% = P(D|X)*P(X) /P(D) 
     P(Y|D) = 0.020 / 0.032 = 62.5%
 
   Sanity check: 37.5% + 62.5% = 100% ✓

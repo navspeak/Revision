@@ -139,6 +139,58 @@ x̄ = 34.5 < LCV = 34.76 → falls below LCV → **Reject H₀** ✓
 
 ---
 
+## Q4 — Paracetamol Confidence Interval
+
+**Setup:**
+- Acceptable range: 450–550 mg (±10% of 500 mg)
+- Sample: n = 100 tablets, x̄ = 530 mg, s = 100 mg
+- Confidence level: 95%
+
+**(a)** Calculate the 95% CI for the true population mean paracetamol content.
+
+<details>
+<summary>Answer</summary>
+
+SE = s/√n = 100/√100 = **10 mg**
+
+Z\* = 1.96 (95% CI)
+
+$$CI = \bar{x} \pm Z^* \times SE = 530 \pm 1.96 \times 10 = 530 \pm 19.6$$
+
+$$CI = \mathbf{(510.4\ mg,\ 549.6\ mg)}$$
+
+</details>
+
+---
+
+**(b)** Is the manufacturing process running successfully?
+
+<details>
+<summary>Answer</summary>
+
+Acceptable range: 450–550 mg.
+
+CI = (510.4, 549.6) — entirely within 450–550 → **process is running successfully**.
+
+We are 95% confident the true mean paracetamol content is between 510.4 mg and 549.6 mg, which is within the permissible range.
+
+> Note: even though x̄ = 530 is above 500, the CI stays within 550 — no regulatory alarm.
+
+</details>
+
+---
+
+**(c)** What is the margin of error?
+
+<details>
+<summary>Answer</summary>
+
+$$ME = Z^* \times SE = 1.96 \times 10 = \mathbf{19.6\ mg}$$
+
+</details>
+
+---
+
 ## Q3 — Paracetamol Manufacturing Process
 
 A pharma company manufactures paracetamol tablets. The regulatory safe amount is **500 mg**. Too low → quality issue. Too high → regulatory issue. A sample of **n = 900** tablets gives x̄ = **510 mg**, s = **110 mg**. Test at **α = 5%**.

@@ -103,3 +103,77 @@ Reducing α (stricter) → fewer Type I errors → more Type II errors.
 Increasing α (lenient) → fewer Type II errors → more Type I errors.
 
 You cannot reduce both simultaneously without increasing sample size.
+
+---
+
+## Sample Size and Type II Error
+
+Increasing **n** reduces Type II error. Here's why:
+
+```
+Larger sample → smaller standard error (SE = σ/√n)
+              → more precise estimates
+              → real effects are easier to detect
+              → POWER goes UP
+              → β (Type II error rate) goes DOWN
+
+Power = 1 − β
+
+More n → more power → less Type II error
+```
+
+### Intuition with a biased coin
+
+```
+True bias: 55% heads (a slight, real effect)
+
+n = 10 flips:
+   You might get 5 or 6 heads — looks random
+   → fail to reject "coin is fair" → Type II error
+
+n = 10,000 flips:
+   The slight bias becomes statistically obvious
+   → reject "coin is fair" → no Type II error
+```
+
+### Why this matters
+
+Big samples reduce **both** error types simultaneously:
+
+```
+For fixed α: increase n → β drops
+For fixed β: increase n → α can be reduced
+```
+
+That's why well-designed studies aim for **adequate sample size first** — power calculations tell you how much data you need to reliably detect an effect of a given size.
+
+---
+
+## Quick Reference
+
+```
+Type I  → α  → P(reject H₀ | H₀ true)   → FALSE POSITIVE
+Type II → β  → P(fail to reject | H₀ false) → FALSE NEGATIVE
+
+Power   = 1 − β = ability to detect a true effect
+
+α and β have a trade-off (for fixed n).
+n is the lever that reduces BOTH.
+```
+
+---
+
+## Common Quiz Questions
+
+**Q: Which is correct?**
+
+```
+A) Type I error: a true H₀ is rejected         ✓ (definition)
+B) Type II error: a false H₀ is accepted       ✓ (definition)
+C) Increasing sample size reduces Type II       ✓ (power increases)
+D) All of the above                              ← typically the answer
+```
+
+All three are correct definitions / facts. The "trick" of these multi-choice questions is that **all the individual statements are true** — so "All of the above" is right.
+
+> Memory trick: Type I = "one mistake = false alarm". Type II = "two mistakes = missed it".
