@@ -44,6 +44,13 @@ df['calamity_type'].mode()[0]
 > Python `.var()` and `.std()` use **n−1** (Bessel's correction) by default — sample statistics.  
 > Pass `ddof=0` for population formula.
 
+* Bessel's correction. : When to Use n−1 in the Denominator for Variance
+The choice between n and n−1 depends on what your data represents:
+* n → when your data is the entire population
+* n−1 → when your data is a sample drawn from a larger population
+
+This distinction is called Bessel's correction.
+
 ### Why SD over Variance?
 
 Variance is in squared units (e.g. km²). SD is in the same units as the original data, so it's interpretable as a typical distance from the mean.
