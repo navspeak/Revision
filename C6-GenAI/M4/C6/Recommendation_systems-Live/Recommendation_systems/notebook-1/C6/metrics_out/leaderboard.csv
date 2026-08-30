@@ -1,0 +1,7 @@
+model,notes,split,K,Precision,Recall,NDCG,UsersEval
+baseline_placeholder,first metrics harness run,val,5,0.0,0.0,0.0,0
+baseline_placeholder,first metrics harness run,val,10,0.0,0.0,0.0,0
+baseline_placeholder,first metrics harness run,val,20,0.0,0.0,0.0,0
+baseline_placeholder,first metrics harness run,test,5,0.0,0.0,0.0,0
+baseline_placeholder,first metrics harness run,test,10,0.0,0.0,0.0,0
+baseline_placeholder,first metrics harness run,test,20,0.0,0.0,0.0,0

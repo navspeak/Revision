@@ -1,0 +1,166 @@
+Welcome to the assignment on transfer learning!
+
+Problem Statement
+ 
+Objective
+The objective of this assignment is to identify surface defects in industrial materials using transfer learning with convolutional neural networks. Learners will use a pre-trained deep learning model and adapt it to classify surface defects from image data by appropriately loading the model, configuring a freezing strategy, and retraining it on the target dataset.
+
+ 
+
+The problem statement for this assignment can be summarised as follows:
+
+“Given images of industrial surfaces belonging to different defect categories, use a pre-trained convolutional neural network to correctly classify the defect type.”
+
+ 
+Business Value
+In industrial manufacturing, surface defects directly affect product quality, safety, and customer satisfaction. Manual inspection is time-consuming, expensive, and prone to human error, especially at scale. Computer vision–based defect identification systems enable:
+
+faster inspection pipelines
+
+consistent quality control
+
+early detection of production issues
+
+ 
+
+However, collecting large labelled datasets for every new manufacturing setting is often impractical. Transfer learning addresses this challenge by reusing visual representations learned from large-scale datasets and adapting them efficiently to domain-specific inspection tasks.
+
+ 
+
+ 
+
+Dataset Overview
+ 
+
+Context
+The dataset consists of images representing different types of surface defects commonly observed in industrial materials. Each image belongs to exactly one defect category. The dataset is already organised into class-wise folders and is suitable for supervised image classification.
+
+ 
+
+Content
+The dataset contains multiple defect classes - crazing, inclusion, patches, pitted surfaces, rolled-in scale, and scratches
+
+Images are grayscale
+
+The training and validation sets are already split into two subfolders in the data
+
+Both the training and validation data contain an "image" folder and an "annotations" folder
+
+The "images" folder has subdirectories, each containing images for a specific defect class
+
+The dataset is pre-cleaned and does not contain missing labels
+
+ 
+
+Image Folders
+
+The dataset is organised in a directory-based structure suitable for supervised image classification. Each defect category is stored in a separate folder. A typical directory structure (train folder, for example) is shown below:
+
+NEU-DET/train/
+│
+└─ images/
+         │
+         ├── crazing/
+         │      ├── crazing_1.jpg
+         │      └── ...
+         │
+         ├── inclusion/
+         │
+         ├── patches/
+         │
+         ├── pitted_surface/
+         │
+         ├── rolled-in_scale/
+         │
+         └── scratches/
+ 
+
+ 
+Each folder represents one defect class
+
+All images within a folder belong to the same class
+
+The dataset has a uniform class distribution, making accuracy an appropriate evaluation metric
+
+Image size: 200 × 200 pixels
+
+Number of channels: 1 (grayscale)
+
+ 
+
+
+For this assignment, you are not required to parse or use the annotation files. The bounding box information is provided for dataset completeness and future extensions (e.g. object detection tasks). You can use the directory names for class labels.
+
+ 
+
+The dataset used in this assignment is publicly available and commonly used for benchmarking surface defect classification methods in computer vision.
+ You can download the dataset below: (NEU-DET)
+==
+Results Expected from Learners
+In the starter notebook, you will find headings, subheadings, and checkpoints stating the tasks you need to perform. The marks associated with each checkpoint will also be mentioned in the notebook. Keep in mind not to edit the cells with marking schemes and questions. You can find a brief description of the tasks below.
+
+ 
+
+Data Loading and Preparation [10 Marks]
+Dataset Understanding and Structure
+1.2 Data Preprocessing and Transformations
+Transferring Knowledge and Model Training [25 Marks]
+Pretrained Model Selection
+Model Training 
+Evaluation and Final Predictions [10 Marks]
+Evaluation Metrics and Bias-Variance Tradeoff
+Prediction Analysis
+Conclusion [5 Marks]
+Conclusion and Insights
+ 
+
+Evaluation Rubrics
+Data Understanding
+
+Meets Expectations
+
+Dataset structure is correctly interpreted.
+Classes are identified and handled correctly.
+Does Not Meet Expectations
+
+The dataset structure is misunderstood or incorrectly loaded.
+Class labels are mishandled.
+
+Model Building and Training
+
+Meets Expectations
+
+A valid pre-trained model is loaded correctly.
+Freezing strategy is applied appropriately.
+Model is retrained successfully and converges.
+Does Not Meet Expectations
+
+The model is trained from scratch.
+Freezing strategy is missing or incorrect.
+Training is unstable or ineffective.
+ 
+
+Solution and Outcomes
+
+Meets Expectations
+
+The solution is structured and concise.
+Results, analyses and outcomes are clearly presented.
+Assumptions are stated where relevant.
+Does Not Meet Expectations
+
+Code lacks structure or clarity.
+Results and outcomes are missing or poorly reported.
+Key assumptions are not mentioned.
+ 
+
+Conciseness and Readability of Code
+
+Meets Expectations
+
+Code is readable, modular, and well-commented.
+Built-in and library functions are used appropriately.
+Does Not Meet Expectations
+
+Code is unnecessarily long or repetitive.
+Variable naming and comments are unclear.

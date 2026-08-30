@@ -1,0 +1,52 @@
+**Board Memorandum: Strategic Update and Forward Priorities for FY2026–FY2028**
+
+**To:** Members of the Board of Directors
+**From:** Chief Executive Officer
+**Date:** 15 November 2025
+**Subject:** Organisational Performance, Strategic Risks, and Medium-Term Priorities
+
+This memorandum provides an integrated overview of the organisation’s current performance, key strategic challenges, and recommended priorities for the medium term (FY2026–FY2028). It is intended to support the Board’s forthcoming strategy review and to frame decision-making ahead of the annual planning cycle.
+
+**1. Overall Performance and Market Context**
+
+The organisation delivered solid, though uneven, performance in FY2025. Group revenue grew by 4.2% year-on-year, marginally below the 5% target approved by the Board, while operating margins remained under pressure due to sustained cost inflation, particularly in energy, logistics, and specialist labour. While these headwinds were partially mitigated through pricing actions and efficiency initiatives, the full benefits of these measures will only be realised in the next financial year.
+
+Market conditions remain challenging. Demand across our core segments has stabilised but has not yet returned to pre-volatility growth trajectories. Customer behaviour continues to reflect heightened price sensitivity and shorter contracting cycles, increasing forecasting uncertainty and placing additional strain on working capital management. At the same time, competitive intensity has increased, with both established players and new entrants accelerating digital offerings and adopting more aggressive pricing strategies.
+
+**2. Operational Effectiveness and Cost Management**
+
+Operationally, progress has been made in standardising processes and improving delivery consistency across regions. The enterprise systems upgrade completed in Q3 has improved visibility of inventory and project performance; however, adoption remains uneven, and further management attention is required to embed new ways of working.
+
+Cost control remains a priority. While the organisation has delivered £18m in annualised savings since FY2024, these gains are at risk of being offset by structural cost increases if further action is not taken. The Executive Committee therefore proposes a second phase of cost optimisation, focused less on short-term reductions and more on structural efficiency, including procurement consolidation, rationalisation of under-utilised assets, and selective automation of back-office functions.
+
+**3. People, Capability, and Culture**
+
+Talent availability continues to be a material constraint on execution, particularly in data, engineering, and advanced analytics roles. Attrition in these areas remains above the group average, reflecting both market competition and internal concerns around workload sustainability and career progression.
+
+While employee engagement scores have remained broadly stable, qualitative feedback indicates growing frustration with organisational complexity and decision latency. There is a risk that continued pressure without visible simplification could erode morale and undermine productivity. In response, management is reviewing the operating model with a view to clarifying accountability, reducing management layers where feasible, and strengthening leadership capability at mid-management level.
+
+**4. Technology, Data, and Digital Transformation**
+
+Investment in technology and data capabilities remains central to the organisation’s long-term strategy. Progress has been made in modernising core platforms and expanding the use of data-driven decision support; however, benefits realisation has been slower than anticipated. In several cases, technology solutions have been implemented without sufficient alignment to business processes or user capability.
+
+Management recommends a more disciplined approach to digital investment, prioritising fewer, higher-impact initiatives with clear ownership and measurable outcomes. In particular, there is an opportunity to leverage advanced analytics and machine learning to improve demand forecasting, pricing optimisation, and operational planning. Realising this opportunity will require not only technical investment but also stronger governance and clearer integration between central data teams and business units.
+
+**5. Risk, Regulation, and Reputation**
+
+The risk environment remains complex. Regulatory expectations continue to evolve, particularly in relation to data governance, sustainability reporting, and AI-enabled decision systems. While the organisation remains compliant with current requirements, upcoming changes are likely to increase both reporting burdens and scrutiny.
+
+Reputational risk is also increasing, driven by heightened stakeholder expectations around transparency, ethical use of technology, and environmental impact. Management believes the organisation is well positioned in principle, but current policies and controls may not be sufficiently mature to withstand sustained external challenge. Strengthening risk management and assurance capabilities is therefore a priority.
+
+**6. Strategic Priorities and Trade-offs**
+
+Looking ahead, management proposes three overarching priorities for FY2026–FY2028:
+
+1. **Operational resilience and efficiency**, to protect margins and support sustainable growth.
+2. **Focused investment in data, digital, and capability**, with a clear line of sight to value creation.
+3. **Simplification of the operating model**, to enable faster decision-making and improved accountability.
+
+These priorities will require difficult trade-offs. Not all growth opportunities can be pursued simultaneously, and some legacy activities may need to be exited or de-prioritised. Management will return to the Board with more detailed proposals, including capital allocation options and risk implications, ahead of the next scheduled meeting.
+
+**Conclusion**
+
+In summary, the organisation remains fundamentally sound but is operating in an environment characterised by constraint, complexity, and rapid change. The next phase will require greater focus, sharper prioritisation, and disciplined execution. Board guidance will be critical in ensuring alignment between strategic ambition and operational reality.

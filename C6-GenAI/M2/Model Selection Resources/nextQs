@@ -1,0 +1,61 @@
+Is the data linearly separable?
+    Yes → try Logistic Regression or SVM (linear kernel) first
+
+Do you need to explain the model to non-technical stakeholders?
+    Yes → Decision Tree or Logistic Regression (interpretable)
+
+Do you just want the highest accuracy on tabular data?
+    → Random Forest or Gradient Boosting
+
+Is the dataset very small (< 200 rows)?
+    → KNN, Logistic Regression, Naive Bayes (simple models)
+
+Is training speed critical?
+    → Logistic Regression, Naive Bayes (fastest to train)
+====
+Yes — Logistic Regression works here too
+Despite the name, Logistic Regression is a classification algorithm. It estimates the probability of each class
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+
+model = LogisticRegression(random_state=42, max_iter=1000)
+
+param_grid = {
+    'C':       [0.01, 0.1, 1, 10, 100],  # regularisation strength
+    'solver':  ['lbfgs', 'saga'],         # optimisation algorithm
+    'penalty': ['l2', 'l1'],              # type of regularisation
+}
+
+grid_search = GridSearchCV(model, param_grid, cv=5, scoring='accuracy')
+grid_search.fit(X_train, y_train)
+===
+C is the key hyperparameter — it is the inverse of regularisation strength:
+Small C (e.g. 0.01) → strong regularisation → simpler boundary → may underfit
+Large C (e.g. 100)  → weak regularisation  → complex boundary → may overfit
+===
+Full menu of classifiers you could use on Iris
+ModelKey hyperparameters to tuneBest whenDecision Tree ✓ (we used this)max_depth, min_samples_splitInterpretable rules neededLogistic RegressionC, penalty, solverLinear boundary, fast, interpretableRandom Forestn_estimators, max_depth, max_featuresTabular data, robust, usually very accurateK-Nearest Neighboursn_neighbors, metricSmall datasets, no training phaseSupport Vector MachineC, kernel, gammaSmall-medium data, high-dimensionalNaive Bayesvar_smoothingVery fast, works well with small dataGradient Boostingn_estimators, learning_rate, max_depthHighest accuracy on tabular data
+Neural Network (MLP)hidden_layer_sizes, learning_rate, alphaComplex patterns, large data
+====
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_val_score
+import numpy as np
+
+models = {
+    'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
+    'Decision Tree':       DecisionTreeClassifier(random_state=42),
+    'Random Forest':       RandomForestClassifier(random_state=42),
+    'SVM':                 SVC(random_state=42),
+    'KNN':                 KNeighborsClassifier(),
+}
+
+print(f"{'Model':<25} {'Mean CV Acc':>12} {'Std':>8}")
+print("-" * 48)
+for name, m in models.items():
+    scores = cross_val_score(m, X_train, y_train, cv=5, scoring='accuracy')
+    print(f"{name:<25} {scores.mean():>12.4f} {scores.std():>8.4f}")
