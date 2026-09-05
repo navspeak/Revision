@@ -4,3 +4,4 @@
 *.env
 !.env.example
 !.env.sample
+C8-GenAI/assignment/chroma_legal_db/
