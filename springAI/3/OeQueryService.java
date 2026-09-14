@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -21,21 +22,23 @@ import java.util.Map;
  * captures the body instead of writing to a real socket, and drive the
  * *exact same* forward(request, response, route) call the controller uses.
  *
- * ASSUMPTIONS — please confirm against your actual classes, I only had
- * visibility into OeWebController.java:
- *   1. OeWebRouteResolver.resolve(String path) expects the path AFTER the
- *      "/oe" prefix, e.g. "/data/Customer" — this mirrors
- *      OeWebController.pathWithinOeMapping(request).
- *   2. OeWebRequestForwarder reads columns/filterField/filterOp/filterValue
- *      /limit off the HttpServletRequest's parameters (request.getParameter),
- *      not by re-parsing a raw query string itself.
- *   3. The forwarder writes the OE response body to the HttpServletResponse's
- *      writer/output stream (which MockHttpServletResponse captures) rather
- *      than doing something servlet-container-specific (async dispatch,
- *      committing headers it expects to read back, etc).
- *
- * If any of these don't hold, share OeWebRequestForwarder.java and
- * OeWebRouteResolver.java and this will get adjusted.
+ * CONFIRMED against live code (OeWebRouteResolver.java /
+ * Open4GlOeWebRequestForwarder.java):
+ *   1. resolve(String path) expects the path AFTER the "/oe" prefix,
+ *      e.g. "/data/Customer" — confirmed, matches pathWithinOeMapping().
+ *   2. resolve(...) never returns null (falls back to defaultHandlerClass)
+ *      — no null-check needed.
+ *   3. The forwarder reads the request via OeWebRequestEncoder.encode(request,
+ *      pathVariables) to build the payload sent to the AppServer. The
+ *      OeQueryServiceLiveIT run on 2026-09-14 showed a filtered query
+ *      returning the SAME result size as an unfiltered one — i.e.
+ *      setParameter(...) alone was NOT enough for the filter to take
+ *      effect, which points at the encoder reading getQueryString()
+ *      rather than (or in addition to) the parsed parameter map. Fixed
+ *      below by setting both. Re-run OeQueryServiceLiveIT to confirm this
+ *      resolves it; if it's still not narrowing, share
+ *      OeWebRequestEncoder.java so this can be nailed down exactly rather
+ *      than covering both possibilities defensively.
  *
  * NOTE: MockHttpServletRequest/Response come from `org.springframework:spring-test`.
  * That's normally a test-only dependency — add it as a regular
@@ -59,9 +62,7 @@ public class OeQueryService {
 
         String tableSegment = "/" + table.replaceFirst("^/", "");
         String routePath = "/data" + tableSegment; // mirrors pathWithinOeMapping() output
-
-        MockHttpServletRequest request = new MockHttpServletRequest("GET", "/oe" + routePath);
-        request.setContextPath("");
+        String requestUri = "/oe" + routePath;
 
         Map<String, String> params = new LinkedHashMap<>();
         if (columns != null && !columns.isBlank()) params.put("columns", columns);
@@ -69,7 +70,21 @@ public class OeQueryService {
         if (filterOp != null && !filterOp.isBlank()) params.put("filterOp", filterOp);
         if (filterValue != null && !filterValue.isBlank()) params.put("filterValue", filterValue);
         if (limit != null) params.put("limit", String.valueOf(limit));
+
+        MockHttpServletRequest request = new MockHttpServletRequest("GET", requestUri);
+        request.setContextPath("");
         params.forEach(request::setParameter);
+
+        // Set the raw query string too — setParameter() alone populates the
+        // parsed parameter map but does NOT synthesize a query string, so
+        // any code reading request.getQueryString() directly would see
+        // nothing without this.
+        if (!params.isEmpty()) {
+            UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
+            params.forEach(uriBuilder::queryParam);
+            String queryString = uriBuilder.build().getQuery();
+            request.setQueryString(queryString);
+        }
 
         MockHttpServletResponse response = new MockHttpServletResponse();
 
