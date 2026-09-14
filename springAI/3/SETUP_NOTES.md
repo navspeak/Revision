@@ -107,12 +107,36 @@ Definitions (.df)**) and point `OE_SCHEMA_DF_PATH` at it.
 - Confirm `OeWebRouteResolver.resolve(...)` null-handling.
 - Confirm the forwarder reads query params via `request.getParameter(...)` (vs. re-parsing `getQueryString()`).
 
-## 6. Iteration 3 — vector store / policy RAG tool
+## 6. Package correction (from live code review)
 
-No new build.gradle dependencies beyond what iteration 2 already added
-(`spring-ai-starter-model-transformers` provides both the ONNX embedding
-model *and* pulls in `spring-ai-vector-store` transitively for
-`SimpleVectorStore`).
+`OeWebRequestForwarder`, `OeWebRouteResolver`, and `OeWebRequestTarget`
+actually live in **`com.progress.pasoe.boot.web`**, not `.controller`
+(only `OeWebController` itself is in `.controller`). `OeQueryService.java`
+has been updated to import from the correct package.
+
+Also resolved: `OeWebRouteResolver.resolve(...)` **never returns null** —
+it falls back to `defaultHandlerClass` — so open item #1 in section 5
+above is settled, no null-check needed.
+
+`mockito-core` comes with `spring-boot-starter-test`, already in your
+dependencies — no new build.gradle entry needed for the tests below.
+
+New test files and where they go:
+
+| File | Package / location |
+|---|---|
+| `OeQueryServiceTest.java` | `src/test/java/com/progress/pasoe/boot/web` *(same package as OeWebRouteResolver/OeWebRequestTarget — see file comment for why)* |
+| `OeQueryServiceLiveIT.java` | `src/test/java/com/progress/pasoe/boot/web` |
+
+## 7. Iteration 3 — vector store / policy RAG tool
+
+**One more build.gradle line needed** — `spring-ai-starter-model-transformers`
+only provides the ONNX embedding model, not `VectorStore`/`SimpleVectorStore`.
+Those live in a separate module (see the correction in section 1(b) above):
+
+```groovy
+implementation 'org.springframework.ai:spring-ai-vector-store'
+```
 
 New files and where they go:
 

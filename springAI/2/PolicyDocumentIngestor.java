@@ -38,8 +38,10 @@ public class PolicyDocumentIngestor implements ApplicationRunner {
         TextReader reader = new TextReader(policyDocument);
         reader.getCustomMetadata().put("source", "oe-support-policy.md");
 
+        TokenTextSplitter splitter = TokenTextSplitter.builder().build();
+
         List<Document> rawDocs = reader.get();
-        List<Document> chunks = new TokenTextSplitter().apply(rawDocs);
+        List<Document> chunks = splitter.apply(rawDocs);
 
         policyVectorStore.add(chunks);
         log.info("Ingested {} policy chunks from {} into the in-memory vector store.",
