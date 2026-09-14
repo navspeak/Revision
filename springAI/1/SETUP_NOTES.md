@@ -11,10 +11,18 @@ Dependencies needed so far (cumulative — includes iteration 1):
 dependencies {
     // --- Spring AI core ---
     implementation platform('org.springframework.ai:spring-ai-bom:2.0.1')
-    implementation 'org.springframework.ai:spring-ai-starter-model-openai' // swap for -anthropic, -ollama, etc.
 
     // --- MCP server (stdio, for GitHub Copilot CLI / VS Code discovery) ---
+    // No model-provider starter needed: Copilot is the MCP *client* and
+    // brings its own LLM. This app only exposes @Tool methods — it never
+    // runs a ChatClient or calls a chat model itself. No API key required.
     implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
+
+    // --- local, key-free embedding model for the upcoming vector-store/RAG
+    //     tool — runs an ONNX model (e.g. all-MiniLM-L6-v2) in-process via
+    //     ONNX Runtime. No API key, no network calls at inference time
+    //     (model file is downloaded once on first use / can be pre-cached).
+    implementation 'org.springframework.ai:spring-ai-starter-model-transformers'
 
     // --- needed for OeQueryService's mock-request bridge (iteration 1) ---
     implementation 'org.springframework:spring-test' // NOT testImplementation — used in main code
@@ -30,7 +38,8 @@ repositories {
 
 Notes:
 - `spring-ai-bom:2.0.1` is the current GA and officially supports Spring Boot 4.0.x/4.1.x — no milestone/snapshot repos needed.
-- **Is LangGraph a fit?** No — LangGraph is a Python/TypeScript library; there's no first-class Java port. For a Spring/Java stack, Spring AI's own `ChatClient` + `@Tool` + `Advisor` model *is* the agent framework — it covers tool-calling loops, RAG (via `QuestionAnswerAdvisor`), and memory without pulling in a second, foreign-language framework. Don't add LangGraph here.
+- **No LLM API key anywhere in this stack.** The MCP server just registers `@Tool` beans; Copilot's own model decides when to call them. The only place a "model" runs at all is the local ONNX embedding model for vector search, and that's key-free too. If you ever *also* want a standalone in-app chat demo (independent of Copilot), that's the one place you'd need a `spring-ai-starter-model-*` + a key — skip it for now since it's not part of the current plan.
+- **Is LangGraph a fit?** No — LangGraph is a Python/TypeScript library; there's no first-class Java port. For a Spring/Java stack, Spring AI's own `ChatClient` + `@Tool` + `Advisor` model *is* the agent framework. Moot anyway here since Copilot supplies the agent loop, not your app.
 - Stdio MCP: no extra property needed beyond adding `spring-ai-starter-mcp-server` — that starter defaults to stdio. (The `-webmvc`/`-webflux` starters are for HTTP/SSE instead, not needed for Copilot CLI stdio.)
 
 ## 2. application.yml additions
