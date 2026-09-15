@@ -19,8 +19,10 @@
 **After**
 - Executable **jar**, embedded servlet container
 - `java -jar pasoe-boot.jar` — no `CATALINA_HOME`/`CATALINA_BASE` split at all
-- Config, dependencies, and app in a single artifact — nothing to copy per instance
+- Config, dependencies, and app in a single artifact — defaults (e.g. `openedge.properties`) ship **inside** the jar
+- Optional external **working directory** — any folder — to override those defaults and hold logs, without touching the jar itself
 - One process, one JVM, one classpath — per app, not shared
+- The OpenEdge **AppServer agent** (ABL runtime) is still a separate process, launched from the OpenEdge **install directory** — Spring Boot doesn't replace it, it replaces the Tomcat/Catalina layer that used to sit in front of it
 
 ```mermaid
 flowchart TB
@@ -32,8 +34,12 @@ flowchart TB
         CB2 --> J2[Own JVM, own ports]
     end
     subgraph After["After — Spring Boot"]
-        B1[pasoe-boot.jar<br/>config + deps + app, one artifact] --> B2[Embedded Servlet Container]
+        B1["pasoe-boot.jar<br/>config + deps + app, one artifact<br/>default openedge.properties bundled inside"]
+        WRK["Working directory (any folder, optional)<br/>logs/<br/>openedge.properties override"]
+        WRK -.->|"overrides jar defaults if present"| B1
+        B1 --> B2[Embedded Servlet Container]
         B2 --> B3[Own JVM, isolated]
+        B3 -->|"Open4GL internal:// connection"| AG["OpenEdge AppServer Agent<br/>spawned from OpenEdge Install Dir<br/>(separate process, unchanged)"]
     end
 ```
 
