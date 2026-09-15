@@ -1,0 +1,21 @@
+# Activated only via --spring.profiles.active=mcp (or SPRING_PROFILES_ACTIVE=mcp),
+# i.e. only in the process GitHub Copilot spawns for stdio MCP — NOT when
+# running the app normally to serve /oe/data over HTTP.
+#
+# Why this has to be separate from application.yml: stdio MCP requires
+# stdout to carry ONLY JSON-RPC protocol messages. The Spring Boot
+# banner, startup logs, or any stray console output corrupts the stream
+# and Copilot will fail to parse responses. Disabling the web server
+# here is safe — OeQueryService talks to the OpenEdge AppServer directly
+# via Open4GlOeWebRequestForwarder's own Connection, independent of
+# whether Tomcat is running — so the MCP-invoked process doesn't need
+# the embedded web server at all, and skipping it also means one less
+# port to worry about when Copilot spawns this alongside an
+# already-running normal instance.
+spring:
+  main:
+    web-application-type: none
+    banner-mode: off
+logging:
+  pattern:
+    console:
