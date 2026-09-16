@@ -189,3 +189,26 @@ stream. `application-mcp.yml` turns off the web server and console
 logging, but **only** for the process Copilot spawns
 (`--spring.profiles.active=mcp`) — your normal `bootRun`/deployed
 instance is untouched and keeps serving HTTP as before.
+
+## 9. Iteration 3 follow-up — configurable doc path, modular ingestion, testable steps
+
+**New property** — override the demo doc without touching code or rebuilding
+around it (points anywhere Spring's Resource loader understands: another
+classpath resource, an external file, a URL):
+
+```yaml
+oe:
+  policy:
+    document: classpath:policy/oe-support-policy.md   # override, e.g. file:/etc/pasoe/policy.md
+```
+
+**`PolicyDocumentIngestor` refactored** into three package-private steps
+(`loadDocument`, `chunkDocuments`, `embedAndStore`) instead of one `run()`
+— `loadDocument`/`chunkDocuments` need no embedding model, so they're
+fast, pure-logic unit tests.
+
+**`PolicyVectorStoreConfig`** is (and always was) the one place to swap
+`SimpleVectorStore` for Chroma/Pinecone/pgvector later — now called out
+explicitly in the file comment since it wasn't obvious before.
+
+New file: `PolicyDocumentIngestorTest.java` → `src/test/java/com/progress/pasoe/boot/ai/policy`
