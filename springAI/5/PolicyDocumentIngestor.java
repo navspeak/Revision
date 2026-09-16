@@ -15,13 +15,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Loads the policy document into the vector store at startup.
+ * Loads the configured document(s) into the vector store at startup.
  *
- * Configurable document location: oe.ai.rag.document-path (via
- * AiProperties) — override to point anywhere Spring's ResourceLoader
- * understands: a different classpath resource, an external file
- * (file:/path/to/doc.md), a URL, etc. Defaults to the bundled demo doc
- * so this works out of the box.
+ * Configurable document locations: oe.ai.rag.document-paths (via
+ * AiProperties) — a list, so multiple documents can be ingested. Each
+ * entry can point anywhere Spring's ResourceLoader understands: a
+ * classpath resource, an external file (file:/path/to/doc.md), a URL,
+ * etc. Defaults to a single bundled demo doc so this works out of the
+ * box with zero config.
  *
  * Split into three independently-testable steps rather than one run()
  * method:
@@ -30,6 +31,7 @@ import java.util.List;
  *     embedding model needed
  *   - embedAndStore: the only step that actually needs the real
  *     embedding model / vector store wired up
+ * run() just loops these three over every configured path.
  *
  * Package-private (not private) on purpose, so PolicyDocumentIngestorTest
  * can exercise each step directly without needing a full Spring context
@@ -46,14 +48,21 @@ public class PolicyDocumentIngestor implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        Resource policyDocument = resourceLoader.getResource(aiProperties.rag().documentPath());
+        List<String> paths = aiProperties.rag().documentPaths();
+        int totalChunks = 0;
 
-        List<Document> rawDocs = loadDocument(policyDocument);
-        List<Document> chunks = chunkDocuments(rawDocs);
-        int stored = embedAndStore(chunks);
+        for (String path : paths) {
+            Resource resource = resourceLoader.getResource(path);
 
-        log.info("Ingested {} policy chunks from {} into the vector store.",
-                stored, describe(policyDocument));
+            List<Document> rawDocs = loadDocument(resource);
+            List<Document> chunks = chunkDocuments(rawDocs);
+            int stored = embedAndStore(chunks);
+            totalChunks += stored;
+
+            log.info("Ingested {} chunks from {} into the vector store.", stored, describe(resource));
+        }
+
+        log.info("Ingestion complete: {} total chunks from {} document(s).", totalChunks, paths.size());
     }
 
     List<Document> loadDocument(Resource resource) {
