@@ -3,10 +3,11 @@ package com.progress.pasoe.boot.ai;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
+import java.util.List;
+
 /**
  * Single source of configuration for the AI module, under one oe.ai
- * prefix — replaces the previous separate oe.schema.df-path and
- * oe.policy.document @Value fields.
+ * prefix.
  *
  * <pre>
  * oe:
@@ -14,7 +15,9 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
  *     schema:
  *       df-path: /path/to/sports2000.df       # empty/unset -> falls back to live _file discovery
  *     rag:
- *       document-path: classpath:policy/oe-support-policy.md
+ *       document-paths:
+ *         - classpath:policy/oe-support-policy.md
+ *         - classpath:policy/another-doc.md    # add more as needed
  * </pre>
  *
  * Registered via @EnableConfigurationProperties(AiProperties.class) on
@@ -27,6 +30,6 @@ public record AiProperties(Schema schema, Rag rag) {
     public record Schema(@DefaultValue("") String dfPath) {
     }
 
-    public record Rag(@DefaultValue("classpath:policy/oe-support-policy.md") String documentPath) {
+    public record Rag(@DefaultValue("classpath:policy/oe-support-policy.md") List<String> documentPaths) {
     }
 }
