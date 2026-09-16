@@ -16,13 +16,17 @@ import static org.mockito.Mockito.verify;
  * chunkDocuments need no embedding model and no Spring context — fast,
  * pure-logic tests. Only embedAndStore touches a (mocked) VectorStore.
  *
+ * aiProperties/resourceLoader are passed as null: none of the methods
+ * under test (loadDocument, chunkDocuments, embedAndStore) touch them —
+ * only run() does, which isn't exercised here.
+ *
  * Complements PolicySearchToolsTest, which covers the full pipeline
  * end-to-end with the real ONNX embedding model.
  */
 class PolicyDocumentIngestorTest {
 
     private final VectorStore vectorStore = mock(VectorStore.class);
-    private final PolicyDocumentIngestor ingestor = new PolicyDocumentIngestor(vectorStore);
+    private final PolicyDocumentIngestor ingestor = new PolicyDocumentIngestor(vectorStore, null, null);
 
     @Test
     void loadDocumentReadsClasspathResourceIntoDocuments() {

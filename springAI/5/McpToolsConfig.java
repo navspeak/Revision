@@ -5,6 +5,7 @@ import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,10 +26,15 @@ import java.util.List;
  * a real Advisor off of. See AuditingToolCallback for what it does and
  * where to extend it.
  *
+ * @EnableConfigurationProperties(AiProperties.class) lives here as a
+ * convenient existing @Configuration class to hang it off of — move it
+ * if the app already uses @ConfigurationPropertiesScan elsewhere.
+ *
  * No separate registration needed for ChatClient use, if that's ever
  * added later — the same ToolCallbackProvider bean works for both.
  */
 @Configuration
+@EnableConfigurationProperties(AiProperties.class)
 public class McpToolsConfig {
 
     @Value("${oe.tools.audit.max-input-length:4000}")

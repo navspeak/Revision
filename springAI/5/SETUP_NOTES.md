@@ -242,3 +242,37 @@ New files:
 | `AuditingToolCallbackTest.java` | `src/test/java/com/progress/pasoe/boot/ai` |
 
 `McpToolsConfig.java` updated — every callback from `MethodToolCallbackProvider` now gets wrapped before being exposed, so this applies uniformly to `OeQueryTools` and `PolicySearchTools` without touching either of those classes.
+
+## 11. Iteration 6 — consolidated AiProperties (replaces separate oe.schema.* / oe.policy.*)
+
+**Property names changed** — update your `application.yml`:
+
+```yaml
+oe:
+  ai:
+    schema:
+      df-path: ${OE_SCHEMA_DF_PATH:}                       # was oe.schema.df-path
+    rag:
+      document-path: classpath:policy/oe-support-policy.md # was oe.policy.document
+```
+
+**Why:** one typed `@ConfigurationProperties` record (`AiProperties`) instead
+of scattered `@Value` strings across `OeSchemaCatalog` and
+`PolicyDocumentIngestor` — and `oe.ai.rag.*` (mechanism-scoped) instead of
+`oe.policy.*` (content-scoped), since the config is really "what gets
+ingested for RAG," not specifically "policy" — that's just today's one
+document.
+
+New file: `AiProperties.java` → `com.progress.pasoe.boot.ai`
+
+Registered via `@EnableConfigurationProperties(AiProperties.class)` on
+`McpToolsConfig` — move it if you already use
+`@ConfigurationPropertiesScan` elsewhere in the app.
+
+**Constructor changes** (both now take `AiProperties` instead of a
+`@Value`-injected field):
+- `OeSchemaCatalog(AiProperties aiProperties)` — was no-arg-effectively (field injection)
+- `PolicyDocumentIngestor(VectorStore, AiProperties, ResourceLoader)` — was `(VectorStore)` only; the document path is now resolved to a `Resource` via `ResourceLoader.getResource(...)` inside `run()`, since `@ConfigurationProperties` binds plain `String`s, not `Resource`-typed fields the way `@Value` could
+
+`PolicyDocumentIngestorTest.java` updated to pass `null` for the two new
+constructor args, since the methods under test don't touch them.
