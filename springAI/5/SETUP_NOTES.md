@@ -251,17 +251,20 @@ New files:
 oe:
   ai:
     schema:
-      df-path: ${OE_SCHEMA_DF_PATH:}                       # was oe.schema.df-path
+      df-path: ${OE_SCHEMA_DF_PATH:}                          # was oe.schema.df-path
     rag:
-      document-path: classpath:policy/oe-support-policy.md # was oe.policy.document
+      document-paths:                                         # was oe.policy.document (singular)
+        - classpath:policy/oe-support-policy.md
+        # - classpath:policy/another-doc.md                   # add more as needed — now a list
 ```
 
 **Why:** one typed `@ConfigurationProperties` record (`AiProperties`) instead
 of scattered `@Value` strings across `OeSchemaCatalog` and
-`PolicyDocumentIngestor` — and `oe.ai.rag.*` (mechanism-scoped) instead of
+`PolicyDocumentIngestor` — `oe.ai.rag.*` (mechanism-scoped) instead of
 `oe.policy.*` (content-scoped), since the config is really "what gets
-ingested for RAG," not specifically "policy" — that's just today's one
-document.
+ingested for RAG," not specifically "policy" — and **`document-paths` is
+a list**, not a single value, so more documents can be added later
+without a code change, just another YAML entry.
 
 New file: `AiProperties.java` → `com.progress.pasoe.boot.ai`
 
@@ -272,7 +275,7 @@ Registered via `@EnableConfigurationProperties(AiProperties.class)` on
 **Constructor changes** (both now take `AiProperties` instead of a
 `@Value`-injected field):
 - `OeSchemaCatalog(AiProperties aiProperties)` — was no-arg-effectively (field injection)
-- `PolicyDocumentIngestor(VectorStore, AiProperties, ResourceLoader)` — was `(VectorStore)` only; the document path is now resolved to a `Resource` via `ResourceLoader.getResource(...)` inside `run()`, since `@ConfigurationProperties` binds plain `String`s, not `Resource`-typed fields the way `@Value` could
+- `PolicyDocumentIngestor(VectorStore, AiProperties, ResourceLoader)` — was `(VectorStore)` only; `run()` now loops over `aiProperties.rag().documentPaths()`, resolving each entry to a `Resource` via `ResourceLoader.getResource(...)`
 
 `PolicyDocumentIngestorTest.java` updated to pass `null` for the two new
 constructor args, since the methods under test don't touch them.
