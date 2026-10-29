@@ -36,6 +36,7 @@ DROP PRIMARY KEY;
 ```
 
 **Rules:**
+
 - Implicitly `NOT NULL` + `UNIQUE`
 - Only one per table
 - Can be composite
@@ -81,13 +82,13 @@ DROP FOREIGN KEY fk_emp_dept;
 
 **ON DELETE / ON UPDATE options:**
 
-| Action | Behaviour |
-|---|---|
-| `CASCADE` | Delete/update child rows automatically |
-| `SET NULL` | Set FK column to NULL in child |
-| `SET DEFAULT` | Set FK column to its default value |
-| `RESTRICT` | Block the delete/update if children exist |
-| `NO ACTION` | Same as RESTRICT (checked at end of transaction) |
+| Action          | Behaviour                                        |
+| --------------- | ------------------------------------------------ |
+| `CASCADE`     | Delete/update child rows automatically           |
+| `SET NULL`    | Set FK column to NULL in child                   |
+| `SET DEFAULT` | Set FK column to its default value               |
+| `RESTRICT`    | Block the delete/update if children exist        |
+| `NO ACTION`   | Same as RESTRICT (checked at end of transaction) |
 
 ---
 
@@ -130,11 +131,11 @@ DROP CONSTRAINT uq_email;     -- PostgreSQL / SQL Server
 
 **UNIQUE vs PRIMARY KEY:**
 
-| | PRIMARY KEY | UNIQUE |
-|---|---|---|
-| NULLs allowed | No | Yes (one NULL per column in most DBs) |
-| Per table | Only one | Many |
-| Enforces | Identity | No duplicates |
+|               | PRIMARY KEY | UNIQUE                                |
+| ------------- | ----------- | ------------------------------------- |
+| NULLs allowed | No          | Yes (one NULL per column in most DBs) |
+| Per table     | Only one    | Many                                  |
+| Enforces      | Identity    | No duplicates                         |
 
 ---
 
@@ -208,14 +209,14 @@ DROP CONSTRAINT chk_age;
 
 **What CHECK can and cannot do:**
 
-| | Example |
-|---|---|
-| ✅ Compare to fixed value | `age >= 18` |
+|                             | Example                              |
+| --------------------------- | ------------------------------------ |
+| ✅ Compare to fixed value   | `age >= 18`                        |
 | ✅ List of permitted values | `status IN ('Active', 'Inactive')` |
-| ✅ Range | `price BETWEEN 0 AND 9999` |
-| ✅ Multi-column logic | `end_date > start_date` |
-| ❌ Reference another table | Use `FOREIGN KEY` instead |
-| ❌ Reference another row | Use triggers instead |
+| ✅ Range                    | `price BETWEEN 0 AND 9999`         |
+| ✅ Multi-column logic       | `end_date > start_date`            |
+| ❌ Reference another table  | Use `FOREIGN KEY` instead          |
+| ❌ Reference another row    | Use triggers instead                 |
 
 ---
 
@@ -265,11 +266,11 @@ CREATE TABLE order_item (
 
 ## Quick Reference
 
-| Constraint | Inline | Table-level | Multiple per table | NULLs |
-|---|---|---|---|---|
-| `PRIMARY KEY` | ✅ | ✅ | ❌ one only | ❌ |
-| `FOREIGN KEY` | ✅ | ✅ | ✅ | ✅ |
-| `UNIQUE` | ✅ | ✅ | ✅ | ✅ (one NULL) |
-| `NOT NULL` | ✅ | ❌ | ✅ | N/A |
-| `CHECK` | ✅ | ✅ | ✅ | ✅ |
-| `DEFAULT` | ✅ | ❌ | ✅ | N/A |
+| Constraint      | Inline | Table-level | Multiple per table | NULLs         |
+| --------------- | ------ | ----------- | ------------------ | ------------- |
+| `PRIMARY KEY` | ✅     | ✅          | ❌ one only        | ❌            |
+| `FOREIGN KEY` | ✅     | ✅          | ✅                 | ✅            |
+| `UNIQUE`      | ✅     | ✅          | ✅                 | ✅ (one NULL) |
+| `NOT NULL`    | ✅     | ❌          | ✅                 | N/A           |
+| `CHECK`       | ✅     | ✅          | ✅                 | ✅            |
+| `DEFAULT`     | ✅     | ❌          | ✅                 | N/A           |

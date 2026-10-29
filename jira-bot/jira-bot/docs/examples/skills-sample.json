@@ -1,0 +1,18 @@
+[
+  {
+    "name": "high-priority-unassigned",
+    "description": "High priority work nobody owns yet",
+    "jql": "project = {project} AND priority in (High, Highest) AND assignee is EMPTY AND statusCategory != Done ORDER BY created ASC",
+    "parameters": { "project": "ABC" },
+    "output": "List the oldest first; these need an owner."
+  },
+  {
+    "name": "recently-resolved",
+    "description": "What was finished lately",
+    "jql": "project = {project} AND resolved >= -{days}d ORDER BY resolved DESC",
+    "parameters": [
+      { "name": "project", "description": "Jira project key", "default": "ABC" },
+      { "name": "days", "description": "Look-back window in days", "default": "7" }
+    ]
+  }
+]

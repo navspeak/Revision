@@ -57,6 +57,18 @@ FROM employee;
 -- Dave   60000  Mid
 -- Eve    80000  High
 -- Frank  55000  Low
+
+3. CASE on top of AVG (labeling the average)
+
+sql
+SELECT dept_id,
+       AVG(salary) AS avg_salary,
+       CASE
+           WHEN AVG(salary) >= 70000 THEN 'Well paid'
+           ELSE                           'Below target'
+       END AS verdict
+FROM employee
+GROUP BY dept_id;
 ```
 
 ### CASE in GROUP BY / ORDER BY
@@ -96,6 +108,7 @@ ORDER BY
 **`ORDER BY CASE` vs `ORDER BY salary DESC`:**
 
 For contiguous numeric bands, `ORDER BY salary DESC` produces the same grouping AND gives deterministic within-band order:
+
 ```
 salary DESC:  90000, 81000, 80000, 69000, 68000, 700, 68
 CASE order:   High(any order), Mid(any order), Low(any order)
@@ -103,6 +116,7 @@ CASE order:   High(any order), Mid(any order), Low(any order)
 ```
 
 **Use `CASE` when bands are non-contiguous or non-numeric** — salary DESC breaks down:
+
 ```
 Rule: High = salary >= 80000 OR salary < 100  (VIPs and interns first)
 
@@ -141,11 +155,11 @@ GROUP BY
 -- You must repeat the full CASE expression in GROUP BY
 ```
 
-| Clause | MySQL alias allowed? | Standard SQL / PostgreSQL / SQL Server |
-|---|---|---|
-| `GROUP BY alias` | ✅ MySQL extension | ❌ must repeat expression |
-| `HAVING alias` | ❌ | ❌ must repeat expression |
-| `ORDER BY alias` | ✅ | ✅ (ORDER BY runs after SELECT) |
+| Clause             | MySQL alias allowed? | Standard SQL / PostgreSQL / SQL Server |
+| ------------------ | -------------------- | -------------------------------------- |
+| `GROUP BY alias` | ✅ MySQL extension   | ❌ must repeat expression              |
+| `HAVING alias`   | ❌                   | ❌ must repeat expression              |
+| `ORDER BY alias` | ✅                   | ✅ (ORDER BY runs after SELECT)        |
 
 ---
 
@@ -262,14 +276,15 @@ FROM employee;
 -- Frank  D03  55000  55000
 ```
 
-| | `GROUP BY` | `OVER (PARTITION BY)` |
-|---|---|---|
-| Rows returned | One per group | All original rows kept |
-| Individual columns | Lost | ✅ still accessible |
-| Aggregate value | One per group | Repeated on every row in group |
-| Use when | Summary only | Summary alongside detail |
+|                    | `GROUP BY`  | `OVER (PARTITION BY)`        |
+| ------------------ | ------------- | ------------------------------ |
+| Rows returned      | One per group | All original rows kept         |
+| Individual columns | Lost          | ✅ still accessible            |
+| Aggregate value    | One per group | Repeated on every row in group |
+| Use when           | Summary only  | Summary alongside detail       |
 
 **Classic use case — salary as % of department total:**
+
 ```sql
 -- Impossible with GROUP BY alone (individual rows are gone)
 -- Easy with window function:
@@ -347,6 +362,7 @@ FROM employee;
 ## Ranking Functions
 
 **Why not just ORDER BY + LIMIT?**
+
 ```
 LIMIT is rigid — only top/bottom N rows
 RANK lets you get middle ranges: rank 50–100 in a 1000-product listing
@@ -441,6 +457,7 @@ FROM employee;
 ```
 
 **Use cases:**
+
 - Top 10 selling products (guaranteed exactly 10 rows)
 - Top 3 winners in a race (no shared positions)
 - Deduplicate rows (keep row_num = 1 per group)
@@ -459,12 +476,12 @@ Tobey   492    3           3     2     ← RANK skips 2, DENSE_RANK does not
 Alice   490    4           4     3
 ```
 
-| Function | Ties | Gap after tie | Always unique |
-|---|---|---|---|
-| `ROW_NUMBER` | Different numbers | N/A | ✅ |
-| `RANK` | Same number | ✅ yes | ❌ |
-| `DENSE_RANK` | Same number | ❌ no | ❌ |
-| `PERCENT_RANK` | Same percentage | ❌ no | ❌ |
+| Function         | Ties              | Gap after tie | Always unique |
+| ---------------- | ----------------- | ------------- | ------------- |
+| `ROW_NUMBER`   | Different numbers | N/A           | ✅            |
+| `RANK`         | Same number       | ✅ yes        | ❌            |
+| `DENSE_RANK`   | Same number       | ❌ no         | ❌            |
+| `PERCENT_RANK` | Same percentage   | ❌ no         | ❌            |
 
 ---
 
@@ -535,18 +552,18 @@ FROM employee;
 
 ## Quick Reference
 
-| Function | What it does |
-|---|---|
-| `CASE WHEN` | Conditional logic, classify rows |
-| `ROW_NUMBER()` | Unique sequential number per row |
-| `RANK()` | Rank with gaps after ties |
-| `DENSE_RANK()` | Rank without gaps after ties |
-| `PERCENT_RANK()` | Relative rank 0.0 to 1.0 |
-| `LAG(col, n)` | Value from n rows before current |
-| `LEAD(col, n)` | Value from n rows after current |
-| `SUM() OVER()` | Running/partitioned sum |
-| `PARTITION BY` | Divide window into groups |
-| `ORDER BY` inside OVER | Defines row order within window |
+| Function                 | What it does                     |
+| ------------------------ | -------------------------------- |
+| `CASE WHEN`            | Conditional logic, classify rows |
+| `ROW_NUMBER()`         | Unique sequential number per row |
+| `RANK()`               | Rank with gaps after ties        |
+| `DENSE_RANK()`         | Rank without gaps after ties     |
+| `PERCENT_RANK()`       | Relative rank 0.0 to 1.0         |
+| `LAG(col, n)`          | Value from n rows before current |
+| `LEAD(col, n)`         | Value from n rows after current  |
+| `SUM() OVER()`         | Running/partitioned sum          |
+| `PARTITION BY`         | Divide window into groups        |
+| `ORDER BY` inside OVER | Defines row order within window  |
 
 ---
 

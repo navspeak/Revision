@@ -1,0 +1,23 @@
+# Personal settings and logs. Never commit these.
+config.local.json
+.env
+data/
+jirabot.log*
+*.tmp
+.config-*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Your own skills and agents stay on your machine by default, because JQL and project keys can be
+# company data. The folders are kept (the .gitkeep files) so the app works after a clone.
+# To share skills with your team through git, delete the next four lines.
+skills/*
+!skills/.gitkeep
+agents/*
+!agents/.gitkeep

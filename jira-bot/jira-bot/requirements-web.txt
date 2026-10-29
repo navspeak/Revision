@@ -1,0 +1,5 @@
+# Extra packages for the web edition (run-web.sh / run-web.bat).
+# The Tkinter desktop app (app.py) needs none of these.
+# Tested with streamlit 1.66.1 on Python 3.12. Needs Python 3.10 or newer.
+streamlit>=1.50,<2
+openpyxl>=3.1

@@ -105,6 +105,7 @@ df.sum(axis=1)
 ## Why It Feels Backwards
 
 People intuitively say:
+
 > "I want a column-wise statistic → I should use the column axis → axis=1"
 
 **That's wrong.** The axis is the **direction of movement**, not what you operate on.
@@ -112,7 +113,7 @@ People intuitively say:
 ```
 Column-wise OPERATION   = traverse DOWN ROWS to compute each column's value
                         = axis=0
-                        
+                      
 Row-wise OPERATION       = traverse ACROSS COLUMNS to compute each row's value
                         = axis=1
 ```
@@ -241,14 +242,14 @@ Master rule:
 
 ## Common Operations
 
-| Operation | axis=0 (default) | axis=1 |
-|-----------|------------------|--------|
-| `df.sum()` | Sum each column | Sum each row |
-| `df.mean()` | Mean per column | Mean per row |
-| `df.max()` | Max per column | Max per row |
-| `df.count()` | Non-null count per col | Non-null count per row |
-| `df.apply(f)` | Apply f to each col | Apply f to each row |
-| `df.dropna()` | Drop rows with NaN | Drop columns with NaN |
+| Operation       | axis=0 (default)       | axis=1                 |
+| --------------- | ---------------------- | ---------------------- |
+| `df.sum()`    | Sum each column        | Sum each row           |
+| `df.mean()`   | Mean per column        | Mean per row           |
+| `df.max()`    | Max per column         | Max per row            |
+| `df.count()`  | Non-null count per col | Non-null count per row |
+| `df.apply(f)` | Apply f to each col    | Apply f to each row    |
+| `df.dropna()` | Drop rows with NaN     | Drop columns with NaN  |
 
 ⚠ **Watch out:** `dropna` is the exception that confuses people the other way around. `axis=0` (default) drops ROWS — the row axis is what's being **acted upon**, not collapsed. The convention here is "drop along this axis".
 
