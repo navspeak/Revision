@@ -21,3 +21,4 @@ skills/*
 !skills/.gitkeep
 agents/*
 !agents/.gitkeep
+*:Zone.Identifier
